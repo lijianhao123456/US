@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="37px" height="34px" viewBox="0 0 37 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>material</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="标签页" transform="translate(-1233.000000, -160.000000)">
+            <g id="圈子" transform="translate(1149.000000, 81.000000)">
+                <g id="material" transform="translate(84.156456, 79.012851)">
+                    <rect id="Rectangle-37-Copy-16" x="1" y="0" width="34.4979227" height="32.8256727"></rect>
+                    <g id="folder" transform="translate(1.000000, 3.126255)">
+                        <rect id="Rectangle-51" fill="#D6E4FF" x="9.85654935" y="0.729459394" width="15.6609617" height="7.50301091" rx="3.75150546"></rect>
+                        <path d="M32.0722875,4.09539346 L16.4741057,4.09539346 L15.6318712,1.6029626 C15.3118221,0.64630428 14.3786264,0 13.3207799,0 L2.42563519,0 C1.08479796,0 0,1.03024742 0,2.30365882 L0,24.3163987 C0,25.5898101 1.08479796,26.6200575 2.42563519,26.6200575 L32.0722875,26.6200575 C33.4131248,26.6200575 34.4979227,25.5898101 34.4979227,24.3163987 L34.4979227,6.39905228 C34.4979227,5.12564087 33.4131248,4.09539346 32.0722875,4.09539346 Z" id="Shape" fill="#BAE7FF" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

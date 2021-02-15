@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="34px" viewBox="0 0 36 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>feedback</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="标签页" transform="translate(-1295.000000, -239.000000)">
+            <g id="圈子" transform="translate(1149.000000, 81.000000)">
+                <g id="feedback" transform="translate(146.000000, 158.000000)">
+                    <rect id="Rectangle-53" fill="#FFE58F" x="1" y="8.34866993" width="34.4979227" height="24.4955664" rx="5.04"></rect>
+                    <rect id="Rectangle-54" fill="#FFFBE6" x="5.45134487" y="1" width="25.7807057" height="29.0178249" rx="4.41"></rect>
+                    <path d="M34.8925936,10.9547307 C35.278688,11.6675706 35.4979227,12.4839905 35.4979227,13.3516155 L35.4979227,27.8042364 C35.4979227,30.5877515 33.2414379,32.8442364 30.4579227,32.8442364 L6.04,32.8442364 C3.25648486,32.8442364 1,30.5877515 1,27.8042364 L1,13.3516155 C1,12.5098646 1.20635377,11.7163102 1.57123365,11.01878 L18.0046054,20.5779259 L34.8925936,10.9547307 Z" id="Combined-Shape" fill="#FDDC80"></path>
+                    <rect id="Rectangle-55" fill="#FFF1B8" x="8.78985352" y="5.89911329" width="10.015526" height="1.50741947" rx="0.753709736"></rect>
+                    <rect id="Rectangle-55-Copy" fill="#FFF1B8" x="8.78985352" y="9.66766197" width="14.4668708" height="1.50741947" rx="0.753709736"></rect>
+                    <rect id="Rectangle-55-Copy-2" fill="#FFF1B8" x="8.78985352" y="13.4362107" width="11.870253" height="1.50741947" rx="0.753709736"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
