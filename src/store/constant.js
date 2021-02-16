@@ -1,0 +1,8 @@
+export const TODO_TO_TOP = 'todo_to_top'
+export const ADD_TODO_ITEM = 'add_todo_item'
+export const DELETE_TODO_ITEM = 'delete_todo_item'
+export const DELETE_FINISHED_ITEM = 'delete_finished_item'
+export const FINISHED_TO_TOP = 'finished_to_top'
+export const TO_FINISHED = 'to_finished'
+export const TO_TODOS = 'to_todos'
+export const CLEAR = 'clear'

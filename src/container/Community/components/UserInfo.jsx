@@ -5,9 +5,6 @@ export default ({
   user = {},
   hasTooltip = true,
   showDesc = true,
-  className,
-  textStyle = {},
-  dateStyle = {},
   avatarSize,
   showDivider = true,
   date,
@@ -17,10 +14,24 @@ export default ({
   return (
     <div>
       <Tooltip trigger="hover" title={desc}>
-        <Avatar style={{ backgroundColor: "#20a4ff", color: "#fff" }}></Avatar>
+        <Avatar
+          src={avatar}
+          style={{
+            backgroundColor: "#20a4ff",
+            color: "#fff",
+            marginBottom: "17px",
+          }}
+        ></Avatar>
         <Divider type="vertical" />
         <span>
-          <span>{name}</span>
+          <span
+            style={{
+              fontSize: 14,
+              color: "rgba(0,0,0,0.45)",
+            }}
+          >
+            {name}
+          </span>
           <span style={{ float: "right" }}>
             <Divider type="vertical" />
             <span>{date}</span>

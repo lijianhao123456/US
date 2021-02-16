@@ -5,8 +5,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'index_bundle.js'
+        path: path.resolve(__dirname, '../dist'),
+        filename: 'index_bundle.js',
+        publicPath: '/'//解决刷新404问题
     },
     module: {
         rules: [
@@ -53,7 +54,12 @@ module.exports = {
     },
     devServer: {
         quiet: true,
-        open: true
+        open: true,
+        contentBase: './dist',
+        historyApiFallback: {
+            index: '/' //解决刷新404问题
+        },
+        hot: true
     },
     mode: 'development',
     plugins: [
@@ -76,5 +82,6 @@ module.exports = {
         //     },
         //     clearConsole: true,
         // })
+        //本来想终端输出好看点
     ]
 }
