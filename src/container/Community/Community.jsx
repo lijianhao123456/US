@@ -16,7 +16,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import request from "../../utils/request";
-import { getTopicList, getTopTopic, getLabels, changeLabel } from "./action";
+import { getTopicList, getTopTopic, getLabels } from "./action";
 import "./Community.less";
 import Classification from "./components/Classification.jsx";
 const now = moment();
@@ -59,7 +59,7 @@ const menu = (
 );
 class Community extends Component {
   componentDidMount() {
-    const { page_size } = this.props.topicInfo.topicList;
+    const { page_size } = this.props.topicListInfo.topicList;
     const { search } = this.props.location;
     const { page = 1 } = qs.parse(search.slice(1));
     request(
@@ -76,16 +76,21 @@ class Community extends Component {
     console.log(this.props);
   }
   onChange(pageNumber) {
-    const { page_size } = this.props.topicInfo.topicList;
+    const { page_size } = this.props.topicListInfo.topicList;
     this.props.history.push(`/community/index/0?page=${pageNumber}`);
     request(
       `api/topic/list?page_num=${pageNumber}&page_size=${page_size}&label_id=0&sortord=0`
     ).then((result) => this.props.getTopicList(result.data));
   }
   render() {
-    const { page_size, rows, total, page_num } = this.props.topicInfo.topicList;
-    const topTopic = this.props.topicInfo.topTopic;
-    const labels = this.props.topicInfo.labels;
+    const {
+      page_size,
+      rows,
+      total,
+      page_num,
+    } = this.props.topicListInfo.topicList;
+    const topTopic = this.props.topicListInfo.topTopic;
+    const labels = this.props.topicListInfo.labels;
     return (
       <Content style={{ margin: "18px" }}>
         <Row style={{ marginLeft: -12, marginRight: -12 }}>
@@ -255,7 +260,7 @@ class Community extends Component {
 
 export default connect(
   (state) => ({
-    topicInfo: state.Community,
+    topicListInfo: state.Community,
   }),
   { getTopicList, getTopTopic, getLabels }
 )(Community);

@@ -21,8 +21,10 @@ export default async function request(url, data = {}, type = 'GET') {
             res = await axios.get(url, {
                 params: data
             })
-        } else {//发送POST请求
+        } else if (type === 'POST') {//发送POST请求
             res = await axios.post(url, data);
+        } else if (type === 'PUT') {
+            res = await axios.put(url, data)
         }
     } catch (error) {
         console.log(error);

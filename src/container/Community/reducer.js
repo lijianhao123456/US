@@ -1,4 +1,4 @@
-import { GET_TOPIC_LIST, GET_TOP_TOPIC, GET_LABELS, CHANGE_LABEL } from "./action"
+import { GET_TOPIC_LIST, GET_TOP_TOPIC, GET_LABELS } from "./action"
 
 const initState = {
     topicList: {

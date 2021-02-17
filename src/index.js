@@ -5,7 +5,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import { ConfigProvider } from 'antd';
 import { Provider } from "react-redux"
-import store from "./store/store"
+import store from "./redux/store"
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 
 ReactDOM.render(

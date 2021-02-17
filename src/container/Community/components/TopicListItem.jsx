@@ -3,7 +3,7 @@ import moment from "moment";
 import { Link, withRouter } from "react-router-dom";
 import { List, Card, Tag, Divider, message } from "antd";
 import { EyeOutlined, LikeOutlined, MessageOutlined } from "@ant-design/icons";
-import UserBar from "./UserInfo.jsx";
+import UserInfo from "./UserInfo.jsx";
 import "./TopicListItem.less";
 import request from "../../../utils/request";
 const ListItem = List.Item;
@@ -76,10 +76,6 @@ export default withRouter(({ topicData, changeLabel, history }) => {
   } = topicData;
   const date = moment(date_modify).format("YYYY-MM-DD");
 
-  // const handleTagClick = (label) => {
-  //   dispatch(routerRedux.push(`/community/index/${label}`));
-  // };
-
   const ItemContent = () => (
     <div>
       <ListItem key={topicData.topic_id}>
@@ -93,8 +89,8 @@ export default withRouter(({ topicData, changeLabel, history }) => {
             </Link>
           }
         />
-        <div>
-          <UserBar user={user} date={date}></UserBar>
+        <div style={{ marginBottom: 16 }}>
+          <UserInfo user={user} date={date}></UserInfo>
         </div>
         <div className={"ellipsis-2"}>
           <div

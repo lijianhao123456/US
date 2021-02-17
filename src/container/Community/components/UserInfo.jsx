@@ -5,6 +5,8 @@ export default ({
   user = {},
   hasTooltip = true,
   showDesc = true,
+  textStyle = {},
+  dateStyle = {},
   avatarSize,
   showDivider = true,
   date,
@@ -12,30 +14,58 @@ export default ({
   const { photo: avatar, truename: name = "神秘人", desc } = user;
 
   return (
-    <div>
-      <Tooltip trigger="hover" title={desc}>
-        <Avatar
-          src={avatar}
-          style={{
-            marginBottom: "17px",
-          }}
-        ></Avatar>
-        <Divider type="vertical" />
-        <span>
-          <span
-            style={{
-              fontSize: 14,
-              color: "rgba(0,0,0,0.45)",
-            }}
-          >
-            {name}
+    <div style={{ display: "flex", alignItems: "center" }}>
+      {hasTooltip ? (
+        <Tooltip trigger="hover" title={desc}>
+          <Avatar src={avatar}></Avatar>
+          {showDivider ? <Divider type="vertical" /> : null}
+          <span>
+            <span
+              style={
+                textStyle
+                  ? textStyle
+                  : {
+                      fontSize: 14,
+                      color: "rgba(0,0,0,0.45)",
+                    }
+              }
+            >
+              {name}
+            </span>
+            {date ? (
+              <span style={dateStyle ? dateStyle : { float: "right" }}>
+                {showDivider ? <Divider type="vertical" /> : null}
+                <span>{date}</span>
+              </span>
+            ) : null}
           </span>
-          <span style={{ float: "right" }}>
-            <Divider type="vertical" />
-            <span>{date}</span>
+        </Tooltip>
+      ) : (
+        <div>
+          <Avatar src={avatar}></Avatar>
+          {showDivider ? <Divider type="vertical" /> : null}
+          <span>
+            <span
+              style={
+                textStyle
+                  ? textStyle
+                  : {
+                      fontSize: 14,
+                      color: "rgba(0,0,0,0.45)",
+                    }
+              }
+            >
+              {name}
+            </span>
+            {date ? (
+              <span style={dateStyle ? dateStyle : { float: "right" }}>
+                {showDivider ? <Divider type="vertical" /> : null}
+                <span>{date}</span>
+              </span>
+            ) : null}
           </span>
-        </span>
-      </Tooltip>
+        </div>
+      )}
     </div>
   );
 };
