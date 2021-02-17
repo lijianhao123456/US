@@ -1,13 +1,7 @@
 import { GET_TOPIC_LIST, GET_TOP_TOPIC, GET_LABELS } from "./action"
 
 const initState = {
-    topicList: {
-        page_num: 1,
-        page_size: 10,
-        rows: [1, 1, 1],
-        total: 1,
-        total_page: 1
-    },
+    topicList: {},
     topTopic: [{ user: { username: "" } }],
     labels: [],
 }

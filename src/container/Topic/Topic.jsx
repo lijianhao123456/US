@@ -33,27 +33,29 @@ class Topic extends Component {
       comments,
     } = this.props.topicInfo.topicDetail;
     return (
-      <Content>
-        <div className={"topic-detail-wrapper"}>
-          <div className={"topic-detail-content"}>
-            <TopicTitle topic={topic} />
-            <User topic={topic} />
-            <TopicContent topic={topic} />
-            <TopicBottom
-              toggleLove={this.props.toggleLove}
-              topic={topic}
-              love={love}
-              love_count={love_count}
-            />
-          </div>
+      <div>
+        {topic ? (
+          <Content>
+            <div className={"topic-detail-wrapper"}>
+              <div className={"topic-detail-content"}>
+                <TopicTitle topic={topic} />
+                <User topic={topic} />
+                <TopicContent topic={topic} />
+                <TopicBottom
+                  toggleLove={this.props.toggleLove}
+                  topic={topic}
+                  love={love}
+                  love_count={love_count}
+                />
+              </div>
 
-          <div>
-            <header className={["comment-title"]}>
-              <h3>
-                评论 <span className={["comments-count"]}>{1}</span>
-              </h3>
-            </header>
-            {/* <List
+              <div>
+                <header className={["comment-title"]}>
+                  <h3>
+                    评论 <span className={["comments-count"]}>{1}</span>
+                  </h3>
+                </header>
+                {/* <List
                 itemLayout="vertical"
                 size="large"
                 loading={loading}
@@ -69,9 +71,15 @@ class Topic extends Component {
                 )}
                 className={["comment-list"]}
               /> */}
+              </div>
+            </div>
+          </Content>
+        ) : (
+          <div className="spin-wrapper">
+            <Spin size="large"></Spin>
           </div>
-        </div>
-      </Content>
+        )}
+      </div>
     );
   }
 }
