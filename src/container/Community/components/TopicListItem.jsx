@@ -1,10 +1,11 @@
 import React from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
-import { List, Card, Tag, Divider } from "antd";
+import { Link, withRouter } from "react-router-dom";
+import { List, Card, Tag, Divider, message } from "antd";
 import { EyeOutlined, LikeOutlined, MessageOutlined } from "@ant-design/icons";
 import UserBar from "./UserInfo.jsx";
 import "./TopicListItem.less";
+import request from "../../../utils/request";
 const ListItem = List.Item;
 const ListItemMeta = ListItem.Meta;
 
@@ -13,6 +14,8 @@ const ListItemBottom = ({
   love_count,
   comment_count,
   visitor_count,
+  changeLabel,
+  history,
 }) => {
   const defaultLabel = {
     label_id: -1,
@@ -24,9 +27,17 @@ const ListItemBottom = ({
       <div>
         {labelsHandler.map(({ label_id, label_name }) => (
           <Tag
+            style={{ cursor: "pointer" }}
             key={label_id}
             onClick={() => {
-              console.log(labels);
+              if (label_id !== -1) {
+                history.push(`/community/index/${label_id}`);
+                request(
+                  `api/topic/list?page_num=1&page_size=10&label_id=${label_id}&sortord=0`
+                ).then((result) => changeLabel(result.data));
+              } else {
+                message.error("未分类(US怎么未分类也请求全部第一页数据)");
+              }
             }}
           >
             {label_name}
@@ -53,7 +64,7 @@ const ListItemBottom = ({
   );
 };
 
-export default ({ topicData }) => {
+export default withRouter(({ topicData, changeLabel, history }) => {
   const {
     love_count,
     comment_count,
@@ -95,17 +106,18 @@ export default ({ topicData }) => {
         </div>
       </ListItem>
       <ListItemBottom
+        changeLabel={changeLabel}
         labels={labels}
+        history={history}
         love_count={love_count}
         comment_count={comment_count}
         visitor_count={visitor_count}
       />
     </div>
   );
-
   return (
     <Card bordered={false} className={"topic-card"}>
       <ItemContent />
     </Card>
   );
-};
+});

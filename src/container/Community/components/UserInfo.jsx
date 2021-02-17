@@ -17,8 +17,6 @@ export default ({
         <Avatar
           src={avatar}
           style={{
-            backgroundColor: "#20a4ff",
-            color: "#fff",
             marginBottom: "17px",
           }}
         ></Avatar>

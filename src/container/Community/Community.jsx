@@ -6,20 +6,17 @@ import {
   Col,
   Button,
   List,
-  Card,
-  Tag,
   Pagination,
 } from "antd";
+import qs from "querystring";
 import { DownOutlined } from "@ant-design/icons";
 import TopicListItem from "./components/TopicListItem.jsx";
 import TopTopicItem from "./components/TopTopicItem.jsx";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import logo from "../../assets/icon/tucao.svg";
 import { connect } from "react-redux";
 import moment from "moment";
 import request from "../../utils/request";
-import { getTopicList, getTopTopic, getLabels } from "./action";
+import { getTopicList, getTopTopic, getLabels, changeLabel } from "./action";
 import "./Community.less";
 import Classification from "./components/Classification.jsx";
 const now = moment();
@@ -61,21 +58,12 @@ const menu = (
   </Menu>
 );
 class Community extends Component {
-  state = {
-    labels: [
-      { label_id: 0, label_name: "全部" },
-      { label_id: 1, label_name: "全部" },
-      { label_id: 2, label_name: "全部" },
-      { label_id: 3, label_name: "全部" },
-      { label_id: 4, label_name: "全部" },
-      { label_id: 5, label_name: "全部" },
-      { label_id: 6, label_name: "全部" },
-      { label_id: 7, label_name: "全部" },
-    ],
-  };
   componentDidMount() {
+    const { page_size } = this.props.topicInfo.topicList;
+    const { search } = this.props.location;
+    const { page = 1 } = qs.parse(search.slice(1));
     request(
-      "api/topic/list?page_num=1&page_size=10&label_id=0&sortord=0"
+      `api/topic/list?page_num=${page}&page_size=${page_size}&label_id=0&sortord=0`
     ).then((result) => this.props.getTopicList(result.data));
     request("https://api-usv2.ncuos.com/api/topic/top").then((result) =>
       this.props.getTopTopic(result.data)
@@ -83,22 +71,19 @@ class Community extends Component {
     request("https://api-usv2.ncuos.com/api/topic/label").then((result) =>
       this.props.getLabels(result.data)
     );
-    console.log(this.props)
   }
   test() {
-    console.log(this.props.topicInfo.topicList);
+    console.log(this.props);
   }
   onChange(pageNumber) {
-    console.log("Page: ", pageNumber);
+    const { page_size } = this.props.topicInfo.topicList;
+    this.props.history.push(`/community/index/0?page=${pageNumber}`);
+    request(
+      `api/topic/list?page_num=${pageNumber}&page_size=${page_size}&label_id=0&sortord=0`
+    ).then((result) => this.props.getTopicList(result.data));
   }
   render() {
-    const {
-      page_num = 1,
-      page_size,
-      rows,
-      total,
-      total_page,
-    } = this.props.topicInfo.topicList;
+    const { page_size, rows, total, page_num } = this.props.topicInfo.topicList;
     const topTopic = this.props.topicInfo.topTopic;
     const labels = this.props.topicInfo.labels;
     return (
@@ -120,7 +105,10 @@ class Community extends Component {
                 md={{ span: 24 }}
                 style={{ marginBottom: 16, height: "100%" }}
               >
-                <Classification labels={labels}/>
+                <Classification
+                  changeLabel={this.props.getTopicList}
+                  labels={labels}
+                />
               </Col>
               <Col
                 xs={{ span: 24 }}
@@ -228,19 +216,31 @@ class Community extends Component {
                 size="small"
                 dataSource={topTopic}
                 className={"top-topic"}
-                renderItem={(item) => <TopTopicItem topicData={item} />}
+                renderItem={(item) => (
+                  <TopTopicItem key={item.topic_id} topicData={item} />
+                )}
               />
-              <List itemLayout="vertical" size="large" className={"topic"}>
-                {rows.map((item) => (
-                  <TopicListItem topicData={item} key={item.topic_id} />
-                ))}
+              <List
+                itemLayout="vertical"
+                dataSource={rows}
+                size="large"
+                className={"topic"}
+                renderItem={(item) => (
+                  <TopicListItem
+                    changeLabel={this.props.getTopicList}
+                    topicData={item}
+                    key={item.date_modify}
+                  />
+                )}
+              >
                 <div className={"topic-pagination"}>
                   <Pagination
+                    current={page_num}
                     showQuickJumper
                     defaultCurrent={1}
                     pageSize={page_size}
                     total={total}
-                    onChange={this.onChange}
+                    onChange={this.onChange.bind(this)}
                     showSizeChanger={false}
                   />
                 </div>

@@ -1,4 +1,4 @@
-import { GET_TOPIC_LIST, GET_TOP_TOPIC, GET_LABELS } from "./action"
+import { GET_TOPIC_LIST, GET_TOP_TOPIC, GET_LABELS, CHANGE_LABEL } from "./action"
 
 const initState = {
     topicList: {
@@ -9,7 +9,7 @@ const initState = {
         total_page: 1
     },
     topTopic: [{ user: { username: "" } }],
-    labels: []
+    labels: [],
 }
 
 export default function reducer(preState = initState, action) {
