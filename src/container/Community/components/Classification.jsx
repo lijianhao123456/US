@@ -41,60 +41,28 @@ class Classification extends React.Component {
               >
                 {/* <img src={img_name} alt="star" /> */}
                 {img_name === "quanbu" && (
-                  <img
-                    src={quanbu}
-                    style={{ width: 36, height: 34 }}
-                    alt="quanbu"
-                  />
+                  <img src={quanbu} width="36" height="34" alt="quanbu" />
                 )}
                 {img_name === "fenxiang" && (
-                  <img
-                    src={fenxiang}
-                    style={{ width: 36, height: 34 }}
-                    alt="fenxiang"
-                  />
+                  <img src={fenxiang} width="36" height="34" alt="fenxiang" />
                 )}
                 {img_name === "ziliao" && (
-                  <img
-                    src={ziliao}
-                    style={{ width: 36, height: 34 }}
-                    alt="ziliao"
-                  />
+                  <img src={ziliao} width="36" height="34" alt="ziliao" />
                 )}
                 {img_name === "fankui" && (
-                  <img
-                    src={fankui}
-                    style={{ width: 36, height: 34 }}
-                    alt="fankui"
-                  />
+                  <img src={fankui} width="36" height="34" alt="fankui" />
                 )}
                 {img_name === "taolun" && (
-                  <img
-                    src={taolun}
-                    style={{ width: 36, height: 34 }}
-                    alt="taolun"
-                  />
+                  <img src={taolun} width="36" height="34" alt="taolun" />
                 )}
                 {img_name === "tucao" && (
-                  <img
-                    src={tucao}
-                    style={{ width: 36, height: 34 }}
-                    alt="tucao"
-                  />
+                  <img src={tucao} width="36" height="34" alt="tucao" />
                 )}
                 {img_name === "qita" && (
-                  <img
-                    src={qita}
-                    style={{ width: 36, height: 34 }}
-                    alt="qita"
-                  />
+                  <img src={qita} width="36" height="34" alt="qita" />
                 )}
                 {img_name === "neitui" && (
-                  <img
-                    src={neitui}
-                    style={{ width: 36, height: 34 }}
-                    alt="neitui"
-                  />
+                  <img src={neitui} width="36" height="34" alt="neitui" />
                 )}
                 <span className={"classification-text"}>{label_name}</span>
               </Link>

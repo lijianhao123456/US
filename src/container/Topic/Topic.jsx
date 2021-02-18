@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Spin, Layout, Tag } from "antd";
+import { Spin, Layout, Tag, List } from "antd";
 import qs from "querystring";
 import { DownOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
@@ -12,6 +12,9 @@ import TopicBottom from "./components/TopicBottom.jsx";
 import TopicTitle from "./components/TopicTitle.jsx";
 import User from "./components/User.jsx";
 import TopicContent from "./components/TopicContent.jsx";
+import CommentTitle from "./components/Comment/CommentTitle.jsx";
+import CommentListItem from "./components/Comment/CommentListItem.jsx";
+
 const { Content } = Layout;
 class Topic extends Component {
   componentDidMount() {
@@ -32,6 +35,7 @@ class Topic extends Component {
       love_count,
       comments,
     } = this.props.topicInfo.topicDetail;
+    console.log(comments);
     return (
       <div>
         {topic ? (
@@ -47,30 +51,21 @@ class Topic extends Component {
                   love={love}
                   love_count={love_count}
                 />
-              </div>
-
-              <div>
-                <header className={["comment-title"]}>
-                  <h3>
-                    评论 <span className={["comments-count"]}>{1}</span>
-                  </h3>
-                </header>
-                {/* <List
-                itemLayout="vertical"
-                size="large"
-                loading={loading}
-                dataSource={this.packCommentsContent(comments, author.truename)}
-                locale={{ emptyText: "来做第一个评论的人吧~" }}
-                renderItem={(item, index) => (
-                  <CommentListItem
-                    order={index}
-                    commentData={item}
-                    loading={loading}
-                    replyAction={this.handleReplyClick}
-                  />
-                )}
-                className={["comment-list"]}
-              /> */}
+                <CommentTitle comments={comments} />
+                <List
+                  itemLayout="vertical"
+                  size="large"
+                  dataSource={comments}
+                  locale={{ emptyText: "来做第一个评论的人吧~" }}
+                  renderItem={(item, index) => (
+                    <CommentListItem
+                      order={index + 1}
+                      commentData={item}
+                      // replyAction={this.handleReplyClick}
+                    />
+                  )}
+                  className="comment-list"
+                />
               </div>
             </div>
           </Content>

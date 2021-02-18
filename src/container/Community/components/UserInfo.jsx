@@ -5,8 +5,8 @@ export default ({
   user = {},
   hasTooltip = true,
   showDesc = true,
-  textStyle = {},
-  dateStyle = {},
+  textStyle,
+  dateStyle,
   avatarSize,
   showDivider = true,
   date,
@@ -14,7 +14,7 @@ export default ({
   const { photo: avatar, truename: name = "神秘人", desc } = user;
 
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <div>
       {hasTooltip ? (
         <Tooltip trigger="hover" title={desc}>
           <Avatar src={avatar}></Avatar>
@@ -33,7 +33,20 @@ export default ({
               {name}
             </span>
             {date ? (
-              <span style={dateStyle ? dateStyle : { float: "right" }}>
+              <span
+                style={
+                  dateStyle
+                    ? dateStyle
+                    : {
+                        float: "right",
+                        lineHeight: "2.8em",
+                        color: "#7b7b7b",
+                        fontSize: "12px",
+                        height: "100%",
+                        marginRight: "4px",
+                      }
+                }
+              >
                 {showDivider ? <Divider type="vertical" /> : null}
                 <span>{date}</span>
               </span>
@@ -58,7 +71,20 @@ export default ({
               {name}
             </span>
             {date ? (
-              <span style={dateStyle ? dateStyle : { float: "right" }}>
+              <span
+                style={
+                  dateStyle
+                    ? dateStyle
+                    : {
+                        float: "right",
+                        lineHeight: "2.8em",
+                        color: "#7b7b7b",
+                        fontSize: "12px",
+                        height: "100%",
+                        marginRight: "4px",
+                      }
+                }
+              >
                 {showDivider ? <Divider type="vertical" /> : null}
                 <span>{date}</span>
               </span>
