@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import request from "../../utils/request";
 
-import { getTopicDetail, toggleLove } from "./action";
+import { getTopicDetail, toggleLove, reply, clearReply } from "./action";
 import "./Topic.less";
 import TopicBottom from "./components/TopicBottom.jsx";
 import TopicTitle from "./components/TopicTitle.jsx";
@@ -14,14 +14,13 @@ import User from "./components/User.jsx";
 import TopicContent from "./components/TopicContent.jsx";
 import CommentTitle from "./components/Comment/CommentTitle.jsx";
 import CommentListItem from "./components/Comment/CommentListItem.jsx";
+import Comment from "./components/Comment/Comment.jsx";
 
-const { Content } = Layout;
+const { Content, Footer } = Layout;
 class Topic extends Component {
   componentDidMount() {
     const { search } = this.props.location;
     const { topic_id } = qs.parse(search.slice(1));
-    console.log(topic_id);
-    // console.log(this.props.topicInfo.topicDetail.topic);
     request(`https://api-usv2.ncuos.com/api/topic?topic_id=${topic_id}`).then(
       (result) => {
         this.props.getTopicDetail(result.data);
@@ -35,12 +34,14 @@ class Topic extends Component {
       love_count,
       comments,
     } = this.props.topicInfo.topicDetail;
-    console.log(comments);
+    console.log(this.props);
+    const { replyInfo } = this.props.topicInfo;
+    const { clearReply } = this.props;
     return (
       <div>
         {topic ? (
-          <Content>
-            <div className={"topic-detail-wrapper"}>
+          <div className={"topic-detail-wrapper"}>
+            <Content>
               <div className={"topic-detail-content"}>
                 <TopicTitle topic={topic} />
                 <User topic={topic} />
@@ -59,6 +60,7 @@ class Topic extends Component {
                   locale={{ emptyText: "来做第一个评论的人吧~" }}
                   renderItem={(item, index) => (
                     <CommentListItem
+                      reply={this.props.reply}
                       order={index + 1}
                       commentData={item}
                       // replyAction={this.handleReplyClick}
@@ -67,8 +69,13 @@ class Topic extends Component {
                   className="comment-list"
                 />
               </div>
-            </div>
-          </Content>
+            </Content>
+            <Comment
+              replyedInfo={replyInfo}
+              topic={topic}
+              clearReply={clearReply}
+            />
+          </div>
         ) : (
           <div className="spin-wrapper">
             <Spin size="large"></Spin>
@@ -82,5 +89,5 @@ export default connect(
   (state) => ({
     topicInfo: state.Topic,
   }),
-  { getTopicDetail, toggleLove }
+  { getTopicDetail, toggleLove, reply, clearReply }
 )(Topic);

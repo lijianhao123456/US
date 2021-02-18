@@ -4,7 +4,6 @@ import moment from "moment";
 export default function User({ topic = {} }) {
   const { user, date_create } = topic;
   const date = moment(date_create).format("YYYY-MM-DD HH:mm:ss");
-  console.log(topic);
   return (
     <div className={["topic-detail-desc"]}>
       <UserInfo

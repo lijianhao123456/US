@@ -8,13 +8,12 @@ import UserInfo from "../../../Community/components/UserInfo.jsx";
 
 import "./CommentListItem.less";
 
-export default function CommentListItem({ commentData, order }) {
+export default function CommentListItem({ reply, commentData, order }) {
   const { user, beReplied } = commentData;
   const { comment_id, content, date_create } = commentData.comment;
   const isReplyedComment = !!beReplied.user;
   const date = moment(date_create);
   const distance = getDistanceFromNow(date);
-  console.log(isReplyedComment);
   return (
     <div className="comment-wrapper" key={comment_id}>
       <div className="comment-desc">
@@ -55,13 +54,13 @@ export default function CommentListItem({ commentData, order }) {
         <Tooltip title="回复">
           <span
             className="comment-reply"
-            // onClick={() =>
-            //   replyAction({
-            //     id: comment.comment_id,
-            //     name: user.truename,
-            //     content: comment.content,
-            //   })
-            // }
+            onClick={() =>
+              reply({
+                comment_id,
+                name: user.truename,
+                content,
+              })
+            }
           >
             <img src={message}></img>
           </span>

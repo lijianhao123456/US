@@ -6,9 +6,6 @@ export default function TopicTitle({ topic = {} }) {
     <div className={"topic-detail-title"}>
       <h3
         style={{ fontSize: 28 }}
-        onClick={() => {
-          console.log(title);
-        }}
         dangerouslySetInnerHTML={{
           __html: `<div>${title}</div>`,
         }}

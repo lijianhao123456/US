@@ -1,7 +1,8 @@
-import { GET_TOPIC_DETAIL, TOGGLE_LOVE } from "./action"
+import { GET_TOPIC_DETAIL, TOGGLE_LOVE, REPLY, CLEAR_REPLY } from "./action"
 
 const initState = {
-    topicDetail: {}
+    topicDetail: {},
+    replyInfo: {}
 }
 
 export default function reducer(preState = initState, action) {
@@ -15,6 +16,14 @@ export default function reducer(preState = initState, action) {
         case TOGGLE_LOVE:
             newState.topicDetail.love = !preState.topicDetail.love
             newState.topicDetail.love_count = preState.topicDetail.love ? newState.topicDetail.love_count + 1 : newState.topicDetail.love_count - 1
+            return newState
+        case REPLY:
+            newState.replyInfo = data
+            console.log(newState.replyInfo);
+            return newState
+        case CLEAR_REPLY:
+            newState.replyInfo = {}
+            console.log(newState.replyInfo);
             return newState
         default:
             return preState

@@ -1,0 +1,32 @@
+.reply-area {
+  background: #fff;
+  max-width: 992px;
+  margin: 0 24px;
+  padding: 6px 40px 40px;
+  .replyed-alert {
+    height: 40px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #f4faff;
+    border-radius: 6px;
+    border: none;
+    margin-bottom: 6px;
+    font-size: 14px;
+    padding-right: 20px;
+    .replyed-content {
+      margin-left: 8px;
+      color: rgba(0, 0, 0, 0.45);
+    }
+  }
+}
+.reply-button {
+  float: right;
+  margin-top: 21px;
+}
+.pc-reply::after {
+  content: "";
+  display: block;
+  clear: both;
+}

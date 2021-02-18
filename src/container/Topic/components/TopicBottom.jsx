@@ -5,7 +5,6 @@ import { LikeFilled } from "@ant-design/icons";
 import request from "../../../utils/request";
 
 export default ({ topic = {}, love, love_count, toggleLove }) => {
-  console.log(topic);
   const { labels = [], topic_id } = topic;
   const defaultLabel = {
     label_id: -1,

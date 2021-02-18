@@ -3,7 +3,6 @@ import React from "react";
 import "./CommentTitle.less";
 
 export default function CommentTitle({ comments }) {
-  console.log(comments);
   return (
     <header className={"comment-title"}>
       <h3>
