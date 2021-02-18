@@ -15,9 +15,9 @@ class Classification extends React.Component {
     return () => {
       console.log(this.props);
       this.props.history.push(`/community/index/${id}`);
-      request(
-        `api/topic/list?page_num=1&page_size=10&label_id=${id}&sortord=0`
-      ).then((result) => this.props.changeLabel(result.data));
+      request(`api/topic/list?page_num=1&page_size=10&label_id=${id}&sortord=0`).then((result) =>
+        this.props.changeLabel(result.data)
+      );
     };
   }
   render() {
@@ -40,30 +40,16 @@ class Classification extends React.Component {
                 onClick={this.changeLabel(label_id).bind(this)}
               >
                 {/* <img src={img_name} alt="star" /> */}
-                {img_name === "quanbu" && (
-                  <img src={quanbu} width="36" height="34" alt="quanbu" />
-                )}
+                {img_name === "quanbu" && <img src={quanbu} width="36" height="34" alt="quanbu" />}
                 {img_name === "fenxiang" && (
                   <img src={fenxiang} width="36" height="34" alt="fenxiang" />
                 )}
-                {img_name === "ziliao" && (
-                  <img src={ziliao} width="36" height="34" alt="ziliao" />
-                )}
-                {img_name === "fankui" && (
-                  <img src={fankui} width="36" height="34" alt="fankui" />
-                )}
-                {img_name === "taolun" && (
-                  <img src={taolun} width="36" height="34" alt="taolun" />
-                )}
-                {img_name === "tucao" && (
-                  <img src={tucao} width="36" height="34" alt="tucao" />
-                )}
-                {img_name === "qita" && (
-                  <img src={qita} width="36" height="34" alt="qita" />
-                )}
-                {img_name === "neitui" && (
-                  <img src={neitui} width="36" height="34" alt="neitui" />
-                )}
+                {img_name === "ziliao" && <img src={ziliao} width="36" height="34" alt="ziliao" />}
+                {img_name === "fankui" && <img src={fankui} width="36" height="34" alt="fankui" />}
+                {img_name === "taolun" && <img src={taolun} width="36" height="34" alt="taolun" />}
+                {img_name === "tucao" && <img src={tucao} width="36" height="34" alt="tucao" />}
+                {img_name === "qita" && <img src={qita} width="36" height="34" alt="qita" />}
+                {img_name === "neitui" && <img src={neitui} width="36" height="34" alt="neitui" />}
                 <span className={"classification-text"}>{label_name}</span>
               </Link>
             </Col>

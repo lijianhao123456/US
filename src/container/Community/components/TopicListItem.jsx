@@ -65,15 +65,7 @@ const ListItemBottom = ({
 };
 
 export default withRouter(({ topicData, changeLabel, history }) => {
-  const {
-    love_count,
-    comment_count,
-    visitor_count,
-    date_modify,
-    labels,
-    user,
-    brief,
-  } = topicData;
+  const { love_count, comment_count, visitor_count, date_modify, labels, user, brief } = topicData;
   const date = moment(date_modify).format("YYYY-MM-DD");
 
   const ItemContent = () => (

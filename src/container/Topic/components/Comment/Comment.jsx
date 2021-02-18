@@ -28,19 +28,11 @@ function Comment({ replyedInfo, clearReply, topic, history }) {
       message.warning("评论内容不能为空!");
     } else {
       if (isReplyComment) {
-        request(
-          "/api/topic/reply",
-          { topic_id, content: inputValue, comment_id },
-          "POST"
-        );
+        request("/api/topic/reply", { topic_id, content: inputValue, comment_id }, "POST");
         handleAlertClose();
         go(0);
       } else {
-        request(
-          "/api/topic/comment",
-          { topic_id, content: inputValue },
-          "POST"
-        );
+        request("/api/topic/comment", { topic_id, content: inputValue }, "POST");
         go(0);
       }
     }
@@ -65,16 +57,8 @@ function Comment({ replyedInfo, clearReply, topic, history }) {
             className="replyed-alert"
           />
         ) : null}
-        <Mentions
-          placeholder="说说你的看法吧~"
-          style={{ height: 84 }}
-          onChange={onChange}
-        />
-        <Button
-          type="primary"
-          onClick={handleCommentSubmit}
-          className="reply-button"
-        >
+        <Mentions placeholder="说说你的看法吧~" style={{ height: 84 }} onChange={onChange} />
+        <Button type="primary" onClick={handleCommentSubmit} className="reply-button">
           评论
         </Button>
       </div>

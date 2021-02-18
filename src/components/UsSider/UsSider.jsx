@@ -8,8 +8,8 @@ const { Sider } = Layout;
 const { SubMenu } = Menu;
 export default class UsSider extends Component {
   render() {
-    const { collapsed } = this.props.collapsed;
-    const { toggleCollapse } = this.props;
+    const { toggleCollapse, collapsed } = this.props;
+    console.log(this.props);
     return (
       <Sider
         onBreakpoint={() => {

@@ -13,13 +13,11 @@ export default ({ topic = {}, love, love_count, toggleLove }) => {
   const labelsHandler = labels.length > 0 ? labels : [defaultLabel];
   const toggle = (topic_id) => {
     return () => {
-      request(
-        "https://api-usv2.ncuos.com/api/topic/love",
-        { love: !love, topic_id },
-        "PUT"
-      ).then((result) => {
-        toggleLove(result.data);
-      });
+      request("https://api-usv2.ncuos.com/api/topic/love", { love: !love, topic_id }, "PUT").then(
+        (result) => {
+          toggleLove(result.data);
+        }
+      );
     };
   };
   return (

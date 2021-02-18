@@ -10,3 +10,12 @@
   margin: 40px;
   text-align: center;
 }
+ul, ol, dl, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ol, ul, dl {
+  margin-top: 0;
+  margin-bottom: 1em;
+}

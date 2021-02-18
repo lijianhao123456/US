@@ -6,7 +6,7 @@ export default function TopTopicItem(item) {
   const {
     title,
     user: { truename },
-    topic_id
+    topic_id,
   } = item.topicData;
   return (
     <Card bordered={false} className={"list-card"}>

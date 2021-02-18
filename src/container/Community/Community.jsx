@@ -1,14 +1,4 @@
-import {
-  Layout,
-  Menu,
-  Dropdown,
-  Row,
-  Col,
-  Button,
-  List,
-  Pagination,
-  Spin,
-} from "antd";
+import { Layout, Menu, Dropdown, Row, Col, Button, List, Pagination, Spin } from "antd";
 import qs from "querystring";
 import { DownOutlined } from "@ant-design/icons";
 import TopicListItem from "./components/TopicListItem.jsx";
@@ -17,9 +7,11 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import request from "../../utils/request";
-import { getTopicList, getTopTopic, getLabels } from "./action";
+import { getTopicList, getTopTopic, getLabels, changeLabel, getBirth, getRank } from "./action";
 import "./Community.less";
 import Classification from "./components/Classification.jsx";
+import InformCard from "./components/InformCard.jsx";
+import RankList from "./components/RankList.jsx";
 const now = moment();
 const { Content, Footer } = Layout;
 const menuConfig = {
@@ -37,61 +29,54 @@ const menuConfig = {
       text: "评论数最多",
     },
   ],
-  click: ({ key }) => {
-    const newOrder = menuConfig.items.find(
-      (item) => item.key.toString() === key
-    );
-    const payload = {
-      label_id: currentRoute,
-      sortord: newOrder.key,
-    };
-    // request("community/saveTopicOrder",payload)
-  },
 };
 
-const menu = (
-  <Menu onClick={menuConfig.click}>
-    {menuConfig.items.map(({ key, text }) => (
-      <Menu.Item key={key}>
-        <div>{text}</div>
-      </Menu.Item>
-    ))}
-  </Menu>
-);
 class Community extends PureComponent {
+  state = {
+    currentSort: { key: 0, text: "最新话题" },
+  };
   componentDidMount() {
     const { page_size = 10 } = this.props.topicListInfo.topicList;
     const { search } = this.props.location;
     const { page = 1 } = qs.parse(search.slice(1));
+    const { getTopicList, getTopTopic, getLabels, getBirth, getRank } = this.props;
     request(
       `api/topic/list?page_num=${page}&page_size=${page_size}&label_id=0&sortord=0`
-    ).then((result) => this.props.getTopicList(result.data));
-    request("https://api-usv2.ncuos.com/api/topic/top").then((result) =>
-      this.props.getTopTopic(result.data)
-    );
-    request("https://api-usv2.ncuos.com/api/topic/label").then((result) =>
-      this.props.getLabels(result.data)
-    );
-  }
-  test() {
-    console.log(this.props);
+    ).then((result) => getTopicList(result.data));
+    request("https://api-usv2.ncuos.com/api/topic/top").then((result) => getTopTopic(result.data));
+    request("https://api-usv2.ncuos.com/api/topic/label").then((result) => getLabels(result.data));
+    request("https://api-usv2.ncuos.com/api/user/birth").then((result) => getBirth(result.data));
+    request("https://api-usv2.ncuos.com/api/user/act_rank").then((result) => getRank(result.data.data));
   }
   onChange(pageNumber) {
     const { page_size } = this.props.topicListInfo.topicList;
-    this.props.history.push(`/community/index/0?page=${pageNumber}`);
+    const { currentLabel } = this.props.topicListInfo;
+    this.props.history.push(`/community/index/${currentLabel}?page=${pageNumber}`);
     request(
-      `api/topic/list?page_num=${pageNumber}&page_size=${page_size}&label_id=0&sortord=0`
+      `api/topic/list?page_num=${pageNumber}&page_size=${page_size}&label_id=${currentLabel}&sortord=0`
+    ).then((result) => this.props.getTopicList(result.data));
+  }
+  handleMenuClick({ key }) {
+    const { currentLabel } = this.props.topicListInfo;
+    const newOrder = menuConfig.items.find((item) => item.key.toString() === key);
+    this.setState({ currentSort: newOrder });
+    request(
+      `api/topic/list?page_num=1&page_size=10&label_id=${currentLabel}&sortord=${key}`
     ).then((result) => this.props.getTopicList(result.data));
   }
   render() {
-    const {
-      page_size,
-      rows,
-      total,
-      page_num,
-    } = this.props.topicListInfo.topicList;
-    const topTopic = this.props.topicListInfo.topTopic;
-    const labels = this.props.topicListInfo.labels;
+    const menu = (
+      <Menu onClick={this.handleMenuClick.bind(this)}>
+        {menuConfig.items.map(({ key, text }) => (
+          <Menu.Item key={key}>
+            <div>{text}</div>
+          </Menu.Item>
+        ))}
+      </Menu>
+    );
+    const { myInfo } = this.props.info;
+    const { page_size, rows, total, page_num } = this.props.topicListInfo.topicList;
+    const { topTopic, labels, birth, rank } = this.props.topicListInfo;
     return (
       <div>
         <Content style={{ margin: "18px" }}>
@@ -113,77 +98,16 @@ class Community extends PureComponent {
                     md={{ span: 24 }}
                     style={{ marginBottom: 16, height: "100%" }}
                   >
-                    <Classification
-                      changeLabel={this.props.getTopicList}
-                      labels={labels}
-                    />
+                    <Classification changeLabel={this.props.getTopicList} labels={labels} />
                   </Col>
-                  <Col
-                    xs={{ span: 24 }}
-                    sm={{ span: 11 }}
-                    md={{ span: 24 }}
-                    style={{ marginBottom: 16 }}
-                  >
-                    <div className={"birthday-wrapper"}>
-                      <h3 className={"title"}>
-                        <span style={{ float: "left" }}>生日快乐</span>
-                        <span style={{ float: "right" }}>
-                          {now.format("MMM.DD")}
-                        </span>
-                      </h3>
-                      <div className={"birthday-content"}>
-                        <div>
-                          <p className={"birthday-empty-text"}>
-                            今天没有过生日的小伙伴哦~
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col
-                    xs={{ span: 24 }}
-                    sm={{ span: 11, offset: 2 }}
-                    md={{ span: 24, offset: 0 }}
-                    style={{ marginBottom: 16, height: "100%" }}
-                  >
-                    <div className={"birthday-wrapper"}>
-                      <h3 className={"title"}>
-                        <span style={{ float: "left" }}>生日快乐</span>
-                        <span style={{ float: "right" }}>
-                          {now.format("MMM.DD")}
-                        </span>
-                      </h3>
-                      <div className={"birthday-content"}>
-                        <div>
-                          <p className={"birthday-empty-text"}>
-                            今天没有过生日的小伙伴哦~
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col
-                    xs={{ span: 24 }}
-                    sm={{ span: 11 }}
-                    md={{ span: 24 }}
-                    style={{ marginBottom: 16, height: "100%" }}
-                  >
-                    <div className={"birthday-wrapper"}>
-                      <h3 className={"title"}>
-                        <span style={{ float: "left" }}>生日快乐</span>
-                        <span style={{ float: "right" }}>
-                          {now.format("MMM.DD")}
-                        </span>
-                      </h3>
-                      <div className={"birthday-content"}>
-                        <div>
-                          <p className={"birthday-empty-text"}>
-                            今天没有过生日的小伙伴哦~
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
+                  <InformCard
+                    data={birth}
+                    date={now.format("MMM.DD")}
+                    title={"生日快乐"}
+                    emptyText="今天没有过生日的小伙伴哦~"
+                  />
+                  <InformCard data={birth} title={"每月之星"} emptyText="投票已经结束了~" />
+                  <RankList rank={rank} myInfo={myInfo} />
                 </Row>
               </Col>
               <Col
@@ -199,14 +123,10 @@ class Community extends PureComponent {
                   <div style={{ height: "40px" }}>
                     <Dropdown overlay={menu} trigger={["click"]}>
                       <span style={{ cursor: "pointer", lineHeight: "40px" }}>
-                        最新话题 <DownOutlined />
+                        {this.state.currentSort.text} <DownOutlined />
                       </span>
                     </Dropdown>
-                    <Button
-                      type="primary"
-                      style={{ float: "right" }}
-                      onClick={this.test.bind(this)}
-                    >
+                    <Button type="primary" style={{ float: "right" }}>
                       发帖
                     </Button>
                   </div>
@@ -224,9 +144,7 @@ class Community extends PureComponent {
                     size="small"
                     dataSource={topTopic}
                     className={"top-topic"}
-                    renderItem={(item) => (
-                      <TopTopicItem key={item.topic_id} topicData={item} />
-                    )}
+                    renderItem={(item) => <TopTopicItem key={item.topic_id} topicData={item} />}
                   />
                   <List
                     itemLayout="vertical"
@@ -284,7 +202,8 @@ class Community extends PureComponent {
 
 export default connect(
   (state) => ({
+    info: state.Global,
     topicListInfo: state.Community,
   }),
-  { getTopicList, getTopTopic, getLabels }
+  { getTopicList, getTopTopic, getLabels, changeLabel, getBirth, getRank }
 )(Community);
