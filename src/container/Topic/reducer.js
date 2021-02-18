@@ -11,7 +11,6 @@ export default function reducer(preState = initState, action) {
     switch (type) {
         case GET_TOPIC_DETAIL:
             newState.topicDetail = data
-            console.log(newState);
             return newState
         case TOGGLE_LOVE:
             newState.topicDetail.love = !preState.topicDetail.love
@@ -19,11 +18,9 @@ export default function reducer(preState = initState, action) {
             return newState
         case REPLY:
             newState.replyInfo = data
-            console.log(newState.replyInfo);
             return newState
         case CLEAR_REPLY:
             newState.replyInfo = {}
-            console.log(newState.replyInfo);
             return newState
         default:
             return preState

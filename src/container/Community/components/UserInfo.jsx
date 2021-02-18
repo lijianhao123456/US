@@ -7,7 +7,6 @@ export default ({
   showDesc = true,
   textStyle,
   dateStyle,
-  avatarSize,
   showDivider = true,
   date,
 }) => {

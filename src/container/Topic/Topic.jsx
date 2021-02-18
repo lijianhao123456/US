@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Spin, Layout, Tag, List } from "antd";
+import { Spin, Layout, List } from "antd";
 import qs from "querystring";
-import { DownOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
-import moment from "moment";
 import request from "../../utils/request";
 
 import { getTopicDetail, toggleLove, reply, clearReply } from "./action";
@@ -16,7 +14,7 @@ import CommentTitle from "./components/Comment/CommentTitle.jsx";
 import CommentListItem from "./components/Comment/CommentListItem.jsx";
 import Comment from "./components/Comment/Comment.jsx";
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 class Topic extends Component {
   componentDidMount() {
     const { search } = this.props.location;
@@ -34,7 +32,6 @@ class Topic extends Component {
       love_count,
       comments,
     } = this.props.topicInfo.topicDetail;
-    console.log(this.props);
     const { replyInfo } = this.props.topicInfo;
     const { clearReply } = this.props;
     return (
@@ -63,7 +60,6 @@ class Topic extends Component {
                       reply={this.props.reply}
                       order={index + 1}
                       commentData={item}
-                      // replyAction={this.handleReplyClick}
                     />
                   )}
                   className="comment-list"

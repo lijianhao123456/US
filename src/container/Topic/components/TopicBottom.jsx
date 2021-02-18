@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Tag } from "antd";
 import "./TopicBottom.less";
 import { LikeFilled } from "@ant-design/icons";
@@ -13,7 +13,6 @@ export default ({ topic = {}, love, love_count, toggleLove }) => {
   const labelsHandler = labels.length > 0 ? labels : [defaultLabel];
   const toggle = (topic_id) => {
     return () => {
-      console.log(topic_id);
       request(
         "https://api-usv2.ncuos.com/api/topic/love",
         { love: !love, topic_id },

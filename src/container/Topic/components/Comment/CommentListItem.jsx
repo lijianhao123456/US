@@ -51,7 +51,10 @@ export default function CommentListItem({ reply, commentData, order }) {
       </div>
       <div className="comment-bottom">
         <span className="comment-date">{distance}</span>
-        <Tooltip title="回复">
+        <Tooltip
+          title="回复"
+          onClick={() => window.scroll(0, document.body.scrollHeight)}
+        >
           <span
             className="comment-reply"
             onClick={() =>

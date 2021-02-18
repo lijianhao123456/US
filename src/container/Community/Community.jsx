@@ -13,7 +13,7 @@ import qs from "querystring";
 import { DownOutlined } from "@ant-design/icons";
 import TopicListItem from "./components/TopicListItem.jsx";
 import TopTopicItem from "./components/TopTopicItem.jsx";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import request from "../../utils/request";
@@ -21,7 +21,7 @@ import { getTopicList, getTopTopic, getLabels } from "./action";
 import "./Community.less";
 import Classification from "./components/Classification.jsx";
 const now = moment();
-const { Content,Footer } = Layout;
+const { Content, Footer } = Layout;
 const menuConfig = {
   items: [
     {
@@ -58,7 +58,7 @@ const menu = (
     ))}
   </Menu>
 );
-class Community extends Component {
+class Community extends PureComponent {
   componentDidMount() {
     const { page_size = 10 } = this.props.topicListInfo.topicList;
     const { search } = this.props.location;

@@ -3,24 +3,21 @@ import { Menu, Layout } from "antd";
 import { Link } from "react-router-dom";
 import { FormOutlined, HomeOutlined, UserOutlined } from "@ant-design/icons";
 import "./UsSider.less";
-import US from "../../assets/icon/logo.svg"
+import US from "../../assets/icon/logo.svg";
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 export default class UsSider extends Component {
-  state = {
-    collapsed: false,
-  };
-  onCollapse = (collapsed) => {
-    this.setState({ collapsed });
-  };
   render() {
-    const { collapsed } = this.state;
+    const { collapsed } = this.props.collapsed;
+    const { toggleCollapse } = this.props;
     return (
       <Sider
+        onBreakpoint={() => {
+          toggleCollapse();
+        }}
         breakpoint="lg"
         collapsed={collapsed}
         width="256"
-        onCollapse={this.onCollapse}
         theme="light"
       >
         <div className="logo">
@@ -29,7 +26,12 @@ export default class UsSider extends Component {
             {!collapsed && <h1>For Ncuhomers</h1>}
           </Link>
         </div>
-        <Menu style={{paddingTop:"16px",paddingBottom:"16px"}} theme="light" defaultSelectedKeys={["1"]} mode="inline">
+        <Menu
+          style={{ paddingTop: "16px", paddingBottom: "16px" }}
+          theme="light"
+          defaultSelectedKeys={["1"]}
+          mode="inline"
+        >
           <Menu.Item key="1" icon={<HomeOutlined />}>
             家园圈子
           </Menu.Item>
