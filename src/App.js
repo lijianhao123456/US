@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux"
 
 import UsSider from "./components/UsSider/UsSider.jsx";
-import MyHeader from "./components/MyHeader/MyHeader.jsx";
 import Community from "./container/Community/Community.jsx";
 import Topic from "./container/Topic/Topic.jsx"
 import Post from "./container/Post/Post.jsx";
@@ -18,13 +17,12 @@ class App extends Component {
     window.innerWidth > "992" ? initCollapse(true) : initCollapse(false)
   }
   render() {
-    const { collapsed, myInfo } = this.props.info
-    const { toggleCollapse, getMyInfo } = this.props
+    const { collapsed } = this.props.info
+    const { toggleCollapse } = this.props
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <UsSider toggleCollapse={toggleCollapse} collapsed={collapsed} />
         <Layout className="site-layout">
-          <MyHeader getMyInfo={getMyInfo} myInfo={myInfo} collapsed={collapsed} toggleCollapse={toggleCollapse} />
           <Switch>
             <Route path="/community/index" component={Community}></Route>
             <Route path="/community/topic" component={Topic}></Route>

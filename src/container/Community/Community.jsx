@@ -11,11 +11,13 @@ import InformCard from "./components/InformCard.jsx";
 import RankList from "./components/RankList.jsx";
 import TopicListItem from "./components/TopicListItem.jsx";
 import TopTopicItem from "./components/TopTopicItem.jsx";
+import MyHeader from "../../components/MyHeader/MyHeader.jsx";
 
 import { getTopicList, getTopTopic, getLabels, changeLabel, getBirth, getRank } from "./action";
 import request from "../../utils/request";
 
 import "./Community.less";
+
 const now = moment();
 const { Content, Footer } = Layout;
 const menuConfig = {
@@ -85,6 +87,7 @@ class Community extends PureComponent {
     const { topTopic, labels, birth, rank } = this.props.topicListInfo;
     return (
       <div>
+        <MyHeader />
         <Content style={{ margin: "18px" }}>
           {rows ? (
             <Row style={{ marginLeft: -12, marginRight: -12 }}>

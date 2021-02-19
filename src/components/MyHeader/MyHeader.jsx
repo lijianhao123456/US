@@ -8,17 +8,22 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Dropdown, message, Avatar } from "antd";
-import "./MyHeader.less";
 import request from "../../utils/request";
+import { connect } from "react-redux";
+
+import { toggleCollapse, getMyInfo, initCollapse } from "../../redux/action";
+import "./MyHeader.less";
+
 const { Header } = Layout;
 
-export default class MyHeader extends Component {
+class MyHeader extends Component {
   componentDidMount() {
     const { getMyInfo } = this.props;
     request("https://api-usv2.ncuos.com/api/user/me").then((result) => getMyInfo(result.data));
   }
   render() {
-    const { toggleCollapse, myInfo, collapsed } = this.props;
+    const { collapsed, myInfo } = this.props.info;
+    const { toggleCollapse } = this.props;
     const { photo, truename, activity } = myInfo;
     const menu = (
       <Menu className="my-dropdown" onClick={() => message.error("开发中")}>
@@ -68,3 +73,9 @@ export default class MyHeader extends Component {
     );
   }
 }
+export default connect(
+  (state) => ({
+    info: state.Global,
+  }),
+  { toggleCollapse, getMyInfo, initCollapse }
+)(MyHeader);

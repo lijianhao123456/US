@@ -13,6 +13,7 @@ import TopicContent from "./components/TopicContent.jsx";
 import CommentTitle from "./components/Comment/CommentTitle.jsx";
 import CommentListItem from "./components/Comment/CommentListItem.jsx";
 import Comment from "./components/Comment/Comment.jsx";
+import MyHeader from "../../components/MyHeader/MyHeader.jsx";
 
 const { Content } = Layout;
 class Topic extends Component {
@@ -29,6 +30,7 @@ class Topic extends Component {
     const { clearReply } = this.props;
     return (
       <div>
+        <MyHeader />
         {topic ? (
           <div className={"topic-detail-wrapper"}>
             <Content>
