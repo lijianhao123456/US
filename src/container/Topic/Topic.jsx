@@ -4,8 +4,6 @@ import qs from "querystring";
 import { connect } from "react-redux";
 import request from "../../utils/request";
 
-import { getTopicDetail, toggleLove, reply, clearReply } from "./action";
-import "./Topic.less";
 import TopicBottom from "./components/TopicBottom.jsx";
 import TopicTitle from "./components/TopicTitle.jsx";
 import User from "./components/User.jsx";
@@ -15,6 +13,8 @@ import CommentListItem from "./components/Comment/CommentListItem.jsx";
 import Comment from "./components/Comment/Comment.jsx";
 import MyHeader from "../../components/MyHeader/MyHeader.jsx";
 
+import { getTopicDetail, toggleLove, reply, clearReply } from "./action";
+import "./Topic.less";
 const { Content } = Layout;
 class Topic extends Component {
   componentDidMount() {
@@ -26,8 +26,10 @@ class Topic extends Component {
   }
   render() {
     const { topic, love, love_count, comments } = this.props.topicInfo.topicDetail;
+    const { myInfo } = this.props.myInfo;
     const { replyInfo } = this.props.topicInfo;
     const { clearReply } = this.props;
+    const isEditAble = topic && topic.user_id === myInfo.user_id;
     return (
       <div>
         <MyHeader />
@@ -35,7 +37,7 @@ class Topic extends Component {
           <div className={"topic-detail-wrapper"}>
             <Content>
               <div className={"topic-detail-content"}>
-                <TopicTitle topic={topic} />
+                <TopicTitle topic={topic} isEditAble={isEditAble} />
                 <User topic={topic} />
                 <TopicContent topic={topic} />
                 <TopicBottom
@@ -75,6 +77,7 @@ class Topic extends Component {
 export default connect(
   (state) => ({
     topicInfo: state.Topic,
+    myInfo: state.Global,
   }),
   { getTopicDetail, toggleLove, reply, clearReply }
 )(Topic);
