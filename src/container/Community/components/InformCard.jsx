@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col } from "antd";
 
 // import "./InformCard.less";
-import UserInfo from "./UserInfo.jsx";
+import UserInfo from "../../../components/UserInfo/UserInfo.jsx";
 
 export default class InformCard extends Component {
   state = {

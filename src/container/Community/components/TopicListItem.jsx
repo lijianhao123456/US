@@ -3,7 +3,7 @@ import moment from "moment";
 import { Link, withRouter } from "react-router-dom";
 import { List, Card, Tag, Divider, message } from "antd";
 import { EyeOutlined, LikeOutlined, MessageOutlined } from "@ant-design/icons";
-import UserInfo from "./UserInfo.jsx";
+import UserInfo from "../../../components/UserInfo/UserInfo.jsx";
 import "./TopicListItem.less";
 import request from "../../../utils/request";
 const ListItem = List.Item;

@@ -9,12 +9,16 @@ const { SubMenu } = Menu;
 export default class UsSider extends Component {
   render() {
     const { toggleCollapse, collapsed } = this.props;
-    const toggle = () => {
-      toggleCollapse();
-    };
-    console.log(this.props);
     return (
-      <Sider onBreakpoint={toggle} breakpoint="lg" collapsed={collapsed} width="256" theme="light">
+      <Sider
+        onBreakpoint={() => {
+          toggleCollapse();
+        }}
+        breakpoint="lg"
+        collapsed={collapsed}
+        width="256"
+        theme="light"
+      >
         <div className="logo">
           <Link to="/">
             <img src={US} className="us-icon"></img>

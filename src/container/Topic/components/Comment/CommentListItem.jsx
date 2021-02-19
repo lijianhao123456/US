@@ -4,7 +4,7 @@ import moment from "moment";
 import { removePrefix, getDistanceFromNow } from "../../../../utils/utils";
 
 import message from "../../../../assets/icon/message.jpg";
-import UserInfo from "../../../Community/components/UserInfo.jsx";
+import UserInfo from "../../../../components/UserInfo/UserInfo.jsx";
 
 import "./CommentListItem.less";
 

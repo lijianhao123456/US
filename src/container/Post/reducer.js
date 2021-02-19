@@ -17,6 +17,7 @@ export default function reducer(preState = initState, action) {
             return newState
         case GET_MY_INFO:
             newState.myInfo = data
+            console.log(newState);
             return newState
         default:
             return preState

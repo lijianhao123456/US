@@ -1,17 +1,21 @@
 import { Layout, Menu, Dropdown, Row, Col, Button, List, Pagination, Spin } from "antd";
 import qs from "querystring";
 import { DownOutlined } from "@ant-design/icons";
-import TopicListItem from "./components/TopicListItem.jsx";
-import TopTopicItem from "./components/TopTopicItem.jsx";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
-import request from "../../utils/request";
-import { getTopicList, getTopTopic, getLabels, changeLabel, getBirth, getRank } from "./action";
-import "./Community.less";
+import { Link } from "react-router-dom";
+
 import Classification from "./components/Classification.jsx";
 import InformCard from "./components/InformCard.jsx";
 import RankList from "./components/RankList.jsx";
+import TopicListItem from "./components/TopicListItem.jsx";
+import TopTopicItem from "./components/TopTopicItem.jsx";
+
+import { getTopicList, getTopTopic, getLabels, changeLabel, getBirth, getRank } from "./action";
+import request from "../../utils/request";
+
+import "./Community.less";
 const now = moment();
 const { Content, Footer } = Layout;
 const menuConfig = {
@@ -46,7 +50,9 @@ class Community extends PureComponent {
     request("https://api-usv2.ncuos.com/api/topic/top").then((result) => getTopTopic(result.data));
     request("https://api-usv2.ncuos.com/api/topic/label").then((result) => getLabels(result.data));
     request("https://api-usv2.ncuos.com/api/user/birth").then((result) => getBirth(result.data));
-    request("https://api-usv2.ncuos.com/api/user/act_rank").then((result) => getRank(result.data.data));
+    request("https://api-usv2.ncuos.com/api/user/act_rank").then((result) =>
+      getRank(result.data.data)
+    );
   }
   onChange(pageNumber) {
     const { page_size } = this.props.topicListInfo.topicList;
@@ -126,9 +132,11 @@ class Community extends PureComponent {
                         {this.state.currentSort.text} <DownOutlined />
                       </span>
                     </Dropdown>
-                    <Button type="primary" style={{ float: "right" }}>
-                      发帖
-                    </Button>
+                    <Link to="/community/post">
+                      <Button type="primary" style={{ float: "right" }}>
+                        发帖
+                      </Button>
+                    </Link>
                   </div>
                   <div className="tag-header">
                     <i className={"dot"}></i>

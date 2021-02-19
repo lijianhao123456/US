@@ -7,7 +7,7 @@ import {
   FireOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Dropdown, message } from "antd";
+import { Layout, Menu, Dropdown, message, Avatar } from "antd";
 import "./MyHeader.less";
 import request from "../../utils/request";
 const { Header } = Layout;
@@ -15,9 +15,7 @@ const { Header } = Layout;
 export default class MyHeader extends Component {
   componentDidMount() {
     const { getMyInfo } = this.props;
-    request("https://api-usv2.ncuos.com/api/user/me").then((result) =>
-      getMyInfo(result.data)
-    );
+    request("https://api-usv2.ncuos.com/api/user/me").then((result) => getMyInfo(result.data));
   }
   render() {
     const { toggleCollapse, myInfo, collapsed } = this.props;
@@ -52,7 +50,13 @@ export default class MyHeader extends Component {
         </div>
         <Dropdown overlay={menu}>
           <div className="notice-icon">
-            <img src={photo} className="my-avatar"></img>
+            {photo ? (
+              <img src={photo} className="my-avatar"></img>
+            ) : (
+              <Avatar size="small" style={{ backgroundColor: "#20a4ff", color: "#fff" }}>
+                {truename && truename.split("")[0]}
+              </Avatar>
+            )}
             <span>{truename}</span>
           </div>
         </Dropdown>

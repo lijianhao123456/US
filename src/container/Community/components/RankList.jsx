@@ -1,7 +1,7 @@
 import React from "react";
 import { Divider, Col } from "antd";
 import "./RankList.less";
-import UserInfo from "./UserInfo.jsx";
+import UserInfo from "../../../components/UserInfo/UserInfo.jsx";
 import no1 from "../../../assets/icon/no1.svg";
 import no2 from "../../../assets/icon/no2.svg";
 import no3 from "../../../assets/icon/no3.svg";
@@ -27,7 +27,7 @@ export default function RankList(props) {
                 <li key={user.user_id}>
                   <RankListItem data={user} rank={index + 1} />
                 </li>
-              ))}
+              ))} 
               <Divider style={{ margin: "10px 0" }} />
               <li>
                 <RankListItem data={myInfo} rank={myInfo.activity_rank} />

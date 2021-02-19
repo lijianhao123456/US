@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://api-usv2.ncuos.com';
@@ -31,3 +32,12 @@ export default async function request(url, data = {}, type = 'GET') {
     }
     return res
 }
+axios.interceptors.response.use(
+    response => {
+        return response;
+    },
+    error => {
+        message.error(error.response.data.message)
+        return Promise.resolve(error.response);
+    }
+)

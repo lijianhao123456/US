@@ -16,7 +16,13 @@ export default ({
     <div>
       {hasTooltip ? (
         <Tooltip trigger="hover" title={desc}>
-          <Avatar src={avatar}></Avatar>
+          {avatar ? (
+            <Avatar src={avatar}></Avatar>
+          ) : (
+            <Avatar style={{ backgroundColor: "#20a4ff", color: "#fff" }}>
+              {name.split("")[0]}
+            </Avatar>
+          )}
           {showDivider ? <Divider type="vertical" /> : null}
           <span>
             <span

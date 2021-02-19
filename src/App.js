@@ -1,12 +1,17 @@
 import { Layout } from "antd";
 import { Switch, Route, Redirect } from "react-router-dom";
 import React, { Component } from "react";
+import { connect } from "react-redux"
+
 import UsSider from "./components/UsSider/UsSider.jsx";
 import MyHeader from "./components/MyHeader/MyHeader.jsx";
 import Community from "./container/Community/Community.jsx";
 import Topic from "./container/Topic/Topic.jsx"
-import { connect } from "react-redux"
+import Post from "./container/Post/Post.jsx";
+
 import { toggleCollapse, getMyInfo, initCollapse } from "./redux/action"
+
+
 class App extends Component {
   componentDidMount() {
     const { initCollapse } = this.props
@@ -23,6 +28,7 @@ class App extends Component {
           <Switch>
             <Route path="/community/index" component={Community}></Route>
             <Route path="/community/topic" component={Topic}></Route>
+            <Route path="/community/post" component={Post}></Route>
             <Redirect to="/community/index/0"></Redirect>
           </Switch>
         </Layout>

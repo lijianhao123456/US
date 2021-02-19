@@ -1,5 +1,6 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 // var FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = {
@@ -65,7 +66,11 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html'
-        })
+        }),
+        new webpack.ProvidePlugin({
+            'window.Quill': 'quill',
+            Quill: 'quill',
+        }),
         // new FriendlyErrorsWebpackPlugin({
         //     compilationSuccessInfo: {
         //         messages: [`Your application is running here: ${config.dev.https ? 'https' : 'http'}://${config.dev.host}:${config.dev.port}`],

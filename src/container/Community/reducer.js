@@ -27,7 +27,6 @@ export default function reducer(preState = initState, action) {
             return newState
         case GET_BIRTH:
             newState.birth = data
-            console.log(newState);
             return newState
         case GET_RANK:
             newState.rank = data

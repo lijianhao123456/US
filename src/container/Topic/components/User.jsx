@@ -1,5 +1,5 @@
 import React from "react";
-import UserInfo from "../../Community/components/UserInfo.jsx";
+import UserInfo from "../../../components/UserInfo/UserInfo.jsx";
 import moment from "moment";
 export default function User({ topic = {} }) {
   const { user, date_create } = topic;
