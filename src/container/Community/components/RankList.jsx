@@ -35,7 +35,7 @@ export default function RankList(props) {
             </ul>
           ) : (
             <div>
-              <p className="birthday-empty-text">{emptyText}</p>
+              <p className="birthday-empty-text">当前暂无排名</p>
             </div>
           )}
         </div>

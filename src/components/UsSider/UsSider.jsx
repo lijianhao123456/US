@@ -9,17 +9,12 @@ const { SubMenu } = Menu;
 export default class UsSider extends Component {
   render() {
     const { toggleCollapse, collapsed } = this.props;
+    const toggle = () => {
+      toggleCollapse();
+    };
     console.log(this.props);
     return (
-      <Sider
-        onBreakpoint={() => {
-          toggleCollapse();
-        }}
-        breakpoint="lg"
-        collapsed={collapsed}
-        width="256"
-        theme="light"
-      >
+      <Sider onBreakpoint={toggle} breakpoint="lg" collapsed={collapsed} width="256" theme="light">
         <div className="logo">
           <Link to="/">
             <img src={US} className="us-icon"></img>
@@ -27,7 +22,7 @@ export default class UsSider extends Component {
           </Link>
         </div>
         <Menu
-          style={{ paddingTop: "16px", paddingBottom: "16px" }}
+          style={{ paddingTop: "16px", paddingBottom: "16px", color: "#b1b2b8" }}
           theme="light"
           defaultSelectedKeys={["1"]}
           mode="inline"
@@ -38,7 +33,7 @@ export default class UsSider extends Component {
           <Menu.Item key="2" icon={<FormOutlined />}>
             通讯录
           </Menu.Item>
-          <SubMenu key="sub1" icon={<UserOutlined />} title="黑匣子">
+          <SubMenu style={{ color: "#b1b2b8" }} key="sub1" icon={<UserOutlined />} title="黑匣子">
             <Menu.Item key="3">签到</Menu.Item>
             <Menu.Item key="4">工作量填写</Menu.Item>
             <Menu.Item key="5">组内互评</Menu.Item>

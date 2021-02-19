@@ -6,12 +6,15 @@ import MyHeader from "./components/MyHeader/MyHeader.jsx";
 import Community from "./container/Community/Community.jsx";
 import Topic from "./container/Topic/Topic.jsx"
 import { connect } from "react-redux"
-import { toggleCollapse, getMyInfo } from "./redux/action"
+import { toggleCollapse, getMyInfo, initCollapse } from "./redux/action"
 class App extends Component {
+  componentDidMount() {
+    const { initCollapse } = this.props
+    window.innerWidth > "992" ? initCollapse(true) : initCollapse(false)
+  }
   render() {
     const { collapsed, myInfo } = this.props.info
     const { toggleCollapse, getMyInfo } = this.props
-    console.log(collapsed);
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <UsSider toggleCollapse={toggleCollapse} collapsed={collapsed} />
@@ -31,5 +34,5 @@ export default connect(
   (state) => ({
     info: state.Global,
   }),
-  { toggleCollapse, getMyInfo }
+  { toggleCollapse, getMyInfo, initCollapse }
 )(App);

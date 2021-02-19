@@ -15,8 +15,6 @@ export default function reducer(preState = initState, action) {
     switch (type) {
         case GET_TOPIC_LIST:
             newState.topicList = data
-            console.log(data);
-            console.log(newState);
             return newState
         case GET_TOP_TOPIC:
             newState.topTopic = data
@@ -26,7 +24,6 @@ export default function reducer(preState = initState, action) {
             return newState
         case CHANGE_LABEL:
             newState.currentLabel = data
-            console.log(newState);
             return newState
         case GET_BIRTH:
             newState.birth = data
@@ -34,7 +31,6 @@ export default function reducer(preState = initState, action) {
             return newState
         case GET_RANK:
             newState.rank = data
-            console.log(newState);
             return newState
         default:
             return preState
