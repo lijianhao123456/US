@@ -6,10 +6,10 @@ axios.defaults.timeout = 30000;
 axios.interceptors.request.use(
     config => {
         const token = localStorage.getItem('token')
-        // if (token) {
-        //     config.headers.authorization = token //请求头加上token
-        // }
-        config.headers.authorization = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjI3LCJyZW1lbWJlcl9tZSI6dHJ1ZSwiZXhwIjoyMjE3OTI3MjQ4fQ.4X0NsqCtqZEFPO6vSARBjQbBWRN5mWtq_SmOLHjBBxo"
+        if (token) {
+            config.headers.authorization = token //请求头加上token
+        }
+        // config.headers.authorization = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNjI3LCJyZW1lbWJlcl9tZSI6dHJ1ZSwiZXhwIjoyMjE3OTI3MjQ4fQ.4X0NsqCtqZEFPO6vSARBjQbBWRN5mWtq_SmOLHjBBxo"
         return config
     },
     err => {

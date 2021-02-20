@@ -36,4 +36,13 @@ dl {
 .ant-layout-sider-light .ant-menu-vertical .ant-menu-item:after {
   border: none;
 }
-
+*:focus {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.ant-input-affix-wrapper-focused {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

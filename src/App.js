@@ -1,45 +1,20 @@
-import { Layout } from "antd";
+import React, { Component } from 'react'
 import { Switch, Route, Redirect } from "react-router-dom";
-import React, { Component } from "react";
-import { connect } from "react-redux"
-
-import UsSider from "./components/UsSider/UsSider.jsx";
-import Community from "./container/Community/Community.jsx";
-import Topic from "./container/Topic/Topic.jsx"
-import Post from "./container/Post/Post.jsx";
-import Edit from "./container/Edit/Edit.jsx";
-
-import { toggleCollapse, getMyInfo, initCollapse } from "./redux/action"
+import CommunityIndex from "./container/CommunityIndex"
+import renderRoutes from './utils/renderRoutes';
+import routes from './router/router'
 
 
-
-class App extends Component {
-  componentDidMount() {
-    const { initCollapse } = this.props
-    window.innerWidth > "992" ? initCollapse(true) : initCollapse(false)
-  }
-  render() {
-    const { collapsed } = this.props.info
-    const { toggleCollapse } = this.props
-    return (
-      <Layout style={{ minHeight: "100vh" }}>
-        <UsSider toggleCollapse={toggleCollapse} collapsed={collapsed} />
-        <Layout className="site-layout">
-          <Switch>
-            <Route path="/community/index" component={Community}></Route>
-            <Route path="/community/topic" component={Topic}></Route>
-            <Route path="/community/post" component={Post}></Route>
-            <Route path="/community/edit" component={Edit}></Route>
-            <Redirect to="/community/index"></Redirect>
-          </Switch>
-        </Layout>
-      </Layout>
-    );
-  }
+export default class App extends Component {
+    render() {
+        const token = localStorage.getItem("token")
+        console.log(token);
+        const authed = token ? true : false
+        const authPath = '/user/login' // 默认未登录的时候返回的页面
+        return (
+            <div>
+                {renderRoutes(routes, authed, authPath)}
+            </div>
+        )
+    }
 }
-export default connect(
-  (state) => ({
-    info: state.Global,
-  }),
-  { toggleCollapse, getMyInfo, initCollapse }
-)(App);

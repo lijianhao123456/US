@@ -1,0 +1,164 @@
+.login-container {
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  overflow: auto;
+  background-image: url(../../common/images/pc-login-bg@2x.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.login-content {
+  padding: 112px 0 24px 0;
+  flex: 1 1;
+}
+.login-main {
+  width: 466px;
+  position: absolute;
+  -webkit-box-shadow: -1px 4px 70px 6px rgb(7 0 2 / 8%);
+  box-shadow: -1px 4px 70px 6px rgb(7 0 2 / 8%);
+  background: #fff;
+  padding: 60px 70px 30px;
+  top: 50%;
+  right: 13%;
+  -webkit-transform: translateY(-52%);
+  transform: translateY(-52%);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  header {
+    color: #3d4568;
+    margin-bottom: 32px;
+    width: 100%;
+    h1 {
+      font-size: 24px;
+      color: #3d4568;
+      margin-bottom: 0;
+      font-family: PingFangSC-Semibold, sans-serif;
+    }
+  }
+  .login {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    .ant-input-affix-wrapper .ant-input-suffix {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+      line-height: 0;
+      color: rgba(0, 0, 0, 0.65);
+    }
+    .ant-input-affix-wrapper::before {
+      width: 0;
+      visibility: hidden;
+      content: "";
+    }
+    .ant-input-affix-wrapper {
+      font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-size: 14px;
+      font-variant: tabular-nums;
+      line-height: 1.5;
+      border: 0;
+      color: rgba(0, 0, 0, 0.65);
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      .ant-input {
+        padding: 6px 11px;
+        height: 36px;
+        outline: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: none;
+        border-bottom: 1px solid #eeeeee;
+        border-radius: 0;
+        padding-left: 0;
+        background: transparent;
+        color: #3d4568;
+      }
+      input::-webkit-input-placeholder {
+        color: #3d4568;
+      }
+      input::-moz-input-placeholder {
+        color: #3d4568;
+      }
+      input::-ms-input-placeholder {
+        color: #3d4568;
+      }
+      .ant-input:focus {
+        border-color: #e3e1e1;
+        outline: 0;
+        -webkit-box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+        box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+        border-right-width: 1px !important;
+      }
+      .site-form-item-icon {
+        font-size: 24px;
+        color: rgba(0, 0, 0, 0.25);
+        line-height: 1;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -ms-flex-align: center;
+        align-items: center;
+        vertical-align: top;
+      }
+    }
+    .login-action {
+      margin-bottom: 20px;
+      text-align: left;
+      font-size: 14px;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+    }
+    .login-form-button {
+      width: 140px;
+      margin: 0 auto 10px auto;
+      background: #475384;
+      border: none;
+      border-radius: 4px;
+    }
+  }
+  .login-forgotton {
+    font-size: 14px;
+    p {
+      color: #3d4568;
+      opacity: 0.8;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+      cursor: pointer;
+      margin: 0;
+    }
+    p:hover {
+      opacity: 1;
+    }
+  }
+  .ant-form-item-explain.ant-form-item-explain-error {
+    text-align: left;
+  }
+  input[type="text"],
+  input[type="password"] {
+    color: #3d4568 !important;
+    opacity: 0.5;
+    letter-spacing: 1px;
+    font-size: 15px;
+    line-height: 1;
+  }
+}

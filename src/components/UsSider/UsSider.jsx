@@ -20,7 +20,7 @@ export default class UsSider extends Component {
         theme="light"
       >
         <div className="logo">
-          <Link to="/">
+          <Link to="/community/index">
             <img src={US} className="us-icon"></img>
             {!collapsed && <h1>For Ncuhomers</h1>}
           </Link>
