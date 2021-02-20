@@ -1,26 +1,19 @@
 import React from "react";
 import { Input, Modal, Layout, message } from "antd";
 import ReactQuill, { Quill } from "react-quill";
+import qs from "querystring";
 import ImageResize from "quill-image-resize-module";
 import LabelsSelectModal from "./components/LabelsSelectModal.jsx";
-import "./Post.less";
 import "react-quill/dist/quill.snow.css";
 import { LeftOutlined } from "@ant-design/icons";
 import CommonHeader from "../../components/CommonHeader/CommonHeader.jsx";
-import { withRouter } from "react-router-dom";
 import request from "../../utils/request.js";
 
 const { confirm } = Modal;
 const { Content } = Layout;
-
 Quill.register("modules/imageResize", ImageResize);
 
-/**
- * 发帖组件，用于新建话题以及修改话题
- * 通过判断当前router来判断是编辑还是新建
- */
-
-class TopicPost extends React.Component {
+class Edit extends React.Component {
   state = {
     title: "",
     content: "",
@@ -29,12 +22,34 @@ class TopicPost extends React.Component {
     labelsSelectModalVisible: false,
   };
   componentDidMount() {
+    const { search } = this.props.location;
+    const { topic_id } = qs.parse(search.slice(1));
+    request("https://api-usv2.ncuos.com/api/user/me").then((result) => {
+      const { user_id: myId } = result.data;
+      request(`https://api-usv2.ncuos.com/api/topic?topic_id=${topic_id}`)
+        .then((result) => {
+          const { title, content, labels, user_id } = result.data.topic;
+          let checkedLabels;
+          console.log(myId, user_id, labels);
+          if (user_id !== myId) {
+            this.props.history.push("/community/index");
+            message.error("你无权编辑此话题");
+          } else {
+            checkedLabels = labels.map((item) => {
+              return item.label_id;
+            });
+            this.setState({ title, content, checkedLabels });
+          }
+        })
+        .catch(() => this.props.history.push("/community/index"));
+    });
     request("https://api-usv2.ncuos.com/api/topic/label").then((res) =>
       this.setState({ labels: res.data })
     );
   }
   handleBackClick = () => {
     const { go } = this.props.history;
+    const { state } = this;
     confirm({
       title: "返回",
       content: (
@@ -118,7 +133,7 @@ class TopicPost extends React.Component {
   };
   render() {
     const handleTitleChange = this.handleInputChange("title");
-    const { content, checkedLabels, labelsSelectModalVisible, labels } = this.state;
+    const { content, checkedLabels, labelsSelectModalVisible, labels, title } = this.state;
     const toolbarContainer = [
       [{ size: ["small", false, "large", "huge"] }], // custom dropdown
       ["bold", "italic", "underline", "strike"], // toggled buttons
@@ -148,13 +163,12 @@ class TopicPost extends React.Component {
       value: content,
       placeholder: "输入话题内容",
     };
-
     return (
       <Content style={{ margin: "24px 24px 0px" }}>
         <div className="post-page">
           <header>
             <CommonHeader
-              title={"发布话题"}
+              title={"编辑话题"}
               left={
                 <div onClick={this.handleBackClick.bind(this)}>
                   <LeftOutlined />
@@ -172,6 +186,7 @@ class TopicPost extends React.Component {
                 bordered={false}
                 className="title-input"
                 size="large"
+                value={title}
                 onChange={handleTitleChange}
               />
             </section>
@@ -198,4 +213,4 @@ class TopicPost extends React.Component {
   }
 }
 
-export default withRouter(TopicPost);
+export default Edit;

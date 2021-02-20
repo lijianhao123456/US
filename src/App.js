@@ -7,8 +7,10 @@ import UsSider from "./components/UsSider/UsSider.jsx";
 import Community from "./container/Community/Community.jsx";
 import Topic from "./container/Topic/Topic.jsx"
 import Post from "./container/Post/Post.jsx";
+import Edit from "./container/Edit/Edit.jsx";
 
 import { toggleCollapse, getMyInfo, initCollapse } from "./redux/action"
+
 
 
 class App extends Component {
@@ -27,7 +29,7 @@ class App extends Component {
             <Route path="/community/index" component={Community}></Route>
             <Route path="/community/topic" component={Topic}></Route>
             <Route path="/community/post" component={Post}></Route>
-            <Route path="/community/edit" component={Post}></Route>
+            <Route path="/community/edit" component={Edit}></Route>
             <Redirect to="/community/index"></Redirect>
           </Switch>
         </Layout>

@@ -14,12 +14,6 @@ const { confirm } = Modal;
 const { Content } = Layout;
 
 Quill.register("modules/imageResize", ImageResize);
-
-/**
- * 发帖组件，用于新建话题以及修改话题
- * 通过判断当前router来判断是编辑还是新建
- */
-
 class TopicPost extends React.Component {
   state = {
     title: "",
@@ -148,7 +142,6 @@ class TopicPost extends React.Component {
       value: content,
       placeholder: "输入话题内容",
     };
-
     return (
       <Content style={{ margin: "24px 24px 0px" }}>
         <div className="post-page">
