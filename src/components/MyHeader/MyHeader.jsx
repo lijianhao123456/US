@@ -56,16 +56,18 @@ class MyHeader extends Component {
         <Dropdown overlay={menu}>
           <div className="notice-icon">
             {photo ? (
-              <img src={photo} className="my-avatar"></img>
+              <Avatar size="small" src={photo} style={{ marginRight: 6 }}></Avatar>
             ) : (
-              <Avatar size="small" style={{ backgroundColor: "#20a4ff", color: "#fff" }}>
+              <Avatar
+                size="small"
+                style={{ backgroundColor: "#20a4ff", color: "#fff", marginRight: 6 }}
+              >
                 {truename && truename.split("")[0]}
               </Avatar>
             )}
             <span>{truename}</span>
           </div>
         </Dropdown>
-
         <div className="notice-icon">
           <BellOutlined style={{ fontSize: 23, color: "#A1A2A2" }} />
         </div>

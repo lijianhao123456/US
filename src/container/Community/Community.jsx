@@ -115,7 +115,7 @@ class Community extends PureComponent {
                     title={"生日快乐"}
                     emptyText="今天没有过生日的小伙伴哦~"
                   />
-                  <InformCard data={birth} title={"每月之星"} emptyText="投票已经结束了~" />
+                  <InformCard title={"每月之星"} emptyText="投票已经结束了~" />
                   <RankList rank={rank} myInfo={myInfo} />
                 </Row>
               </Col>
@@ -142,7 +142,7 @@ class Community extends PureComponent {
                     </Link>
                   </div>
                   <div className="tag-header">
-                    <i className={"dot"}></i>
+                    <i className="dot"></i>
                     <span className="topiclist-text">
                       全部
                       <small>
@@ -154,14 +154,14 @@ class Community extends PureComponent {
                     itemLayout="vertical"
                     size="small"
                     dataSource={topTopic}
-                    className={"top-topic"}
+                    className="top-topic"
                     renderItem={(item) => <TopTopicItem key={item.topic_id} topicData={item} />}
                   />
                   <List
                     itemLayout="vertical"
                     dataSource={rows}
                     size="large"
-                    className={"topic"}
+                    className="topic"
                     renderItem={(item) => (
                       <TopicListItem
                         changeLabel={this.props.getTopicList}
@@ -170,7 +170,7 @@ class Community extends PureComponent {
                       />
                     )}
                   >
-                    <div className={"topic-pagination"}>
+                    <div className="topic-pagination">
                       <Pagination
                         current={page_num}
                         showQuickJumper

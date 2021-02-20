@@ -5,9 +5,11 @@ export default ({
   user = {},
   hasTooltip = true,
   showDesc = true,
+  avatarSize = "default",
   textStyle,
   dateStyle,
   showDivider = true,
+  vertical = false,
   date,
 }) => {
   const { photo: avatar, truename: name = "神秘人", desc } = user;
@@ -16,13 +18,15 @@ export default ({
     <div>
       {hasTooltip ? (
         <Tooltip trigger="hover" title={desc}>
-          {avatar ? (
-            <Avatar src={avatar}></Avatar>
-          ) : (
-            <Avatar style={{ backgroundColor: "#20a4ff", color: "#fff" }}>
-              {name.split("")[0]}
-            </Avatar>
-          )}
+          <div style={vertical ? null : { display: "inline-block" }}>
+            {avatar ? (
+              <Avatar src={avatar} size={avatarSize}></Avatar>
+            ) : (
+              <Avatar size={avatarSize} style={{ backgroundColor: "#20a4ff", color: "#fff" }}>
+                {name.split("")[0]}
+              </Avatar>
+            )}
+          </div>
           {showDivider ? <Divider type="vertical" /> : null}
           <span>
             <span

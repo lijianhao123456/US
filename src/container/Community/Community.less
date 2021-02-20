@@ -74,6 +74,30 @@
   position: relative;
   margin-top: 16px;
 }
+.tag-header::before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: 10px solid transparent;
+  border-right: 10px solid #f0f2f5;
+  position: absolute;
+  right: 0;
+  bottom: -10px;
+  z-index: 10;
+}
+.tag-header::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: 10px solid transparent;
+  border-left: 10px solid #f0f2f5;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  z-index: 10;
+}
 .dot {
   width: 10px;
   height: 10px;

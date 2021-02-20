@@ -3,13 +3,14 @@ import { Row, Col } from "antd";
 
 // import "./InformCard.less";
 import UserInfo from "../../../components/UserInfo/UserInfo.jsx";
+import "./InformCard.less";
 
 export default class InformCard extends Component {
   state = {
     scale: 8,
   };
   render() {
-    const { data, title, date, emptyText, button } = this.props;
+    const { data = [], title, date, emptyText } = this.props;
     return (
       <Col
         xs={{ span: 24 }}
@@ -35,7 +36,18 @@ export default class InformCard extends Component {
                       alignItems: "center",
                     }}
                   >
-                    <UserInfo user={user} />
+                    <UserInfo
+                      vertical={true}
+                      user={user}
+                      showDivider={false}
+                      avatarSize={"large"}
+                      textStyle={{
+                        fontSize: 12,
+                        display: "inline-block",
+                        marginTop: 4,
+                        marginBottom: 7.5,
+                      }}
+                    />
                   </Col>
                 ))}
               </Row>
