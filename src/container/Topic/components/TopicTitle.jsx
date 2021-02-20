@@ -32,6 +32,9 @@ function TopicTitle({ topic = {}, isEditAble, history }) {
       },
     });
   };
+  const handleEditTopic = () => {
+    push(`/community/edit?topic_id=${topic_id}`);
+  };
   return (
     <div className="topic-detail-title">
       <h3
@@ -44,7 +47,7 @@ function TopicTitle({ topic = {}, isEditAble, history }) {
       {isEditAble && (
         <div className="topic-edit-icon">
           <DeleteOutlined onClick={handleDeleteTopic} />
-          <EditOutlined />
+          <EditOutlined onClick={handleEditTopic} />
         </div>
       )}
     </div>

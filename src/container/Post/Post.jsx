@@ -65,21 +65,32 @@ class TopicPost extends React.Component {
   onLabelsModalOk = () => {
     const { content, checkedLabels, title } = this.state;
     const { push } = this.props.history;
-    this.setState(
-      {
-        labelsSelectModalVisible: false,
-      },
-      () => {
-        request(
-          "https://api-usv2.ncuos.com/api/topic",
-          { content, label_id: checkedLabels, title },
-          "POST"
-        ).then((res) => {
-          push(`/community/topic?topic_id=${res.data.topic_id}`);
-          message.success("发布成功");
-        });
+    this.setState({
+      labelsSelectModalVisible: false,
+    });
+    const validators = [
+      { value: title, msg: "标题不能为空!" },
+      { value: content, msg: "内容不能为空!" },
+      { value: checkedLabels.toString(), msg: "请选择至少一个分类!" },
+      { value: checkedLabels.length <= 3, msg: "不能选择多于3个分类!" },
+    ];
+    let pass = true;
+    validators.forEach(({ value, msg }) => {
+      if (!value) {
+        message.warning(msg);
+        pass = false;
       }
-    );
+    });
+    if (pass) {
+      request(
+        "https://api-usv2.ncuos.com/api/topic",
+        { content, label_id: checkedLabels, title },
+        "POST"
+      ).then((res) => {
+        push(`/community/topic?topic_id=${res.data.topic_id}`);
+        message.success("发布成功");
+      });
+    }
   };
   onLabelsModalCancel = () => {
     this.setState({
