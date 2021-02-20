@@ -20,9 +20,11 @@ class Topic extends Component {
   componentDidMount() {
     const { search } = this.props.location;
     const { topic_id } = qs.parse(search.slice(1));
-    request(`https://api-usv2.ncuos.com/api/topic?topic_id=${topic_id}`).then((result) => {
-      this.props.getTopicDetail(result.data);
-    });
+    request(`https://api-usv2.ncuos.com/api/topic?topic_id=${topic_id}`)
+      .then((result) => {
+        this.props.getTopicDetail(result.data);
+      })
+      .catch(() => this.props.history.push("/community/index"));
   }
   render() {
     const { topic, love, love_count, comments } = this.props.topicInfo.topicDetail;
