@@ -26,6 +26,10 @@ export default async function request(url, data = {}, type = 'GET') {
             res = await axios.post(url, data);
         } else if (type === 'PUT') {
             res = await axios.put(url, data)
+        } else if (type === 'DELETE') {
+            res = await axios.delete(url, {
+                params: data
+            })
         }
     } catch (error) {
         console.log(error);

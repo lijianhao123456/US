@@ -1,7 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Input, message, Tag, Row, Col, Modal, Layout } from "antd";
-import { enquireScreen, unenquireScreen } from "enquire-js";
+import { Input, Modal, Layout, message } from "antd";
 import ReactQuill, { Quill } from "react-quill";
 import ImageResize from "quill-image-resize-module";
 import LabelsSelectModal from "./components/LabelsSelectModal.jsx";
@@ -12,14 +10,8 @@ import CommonHeader from "../../components/CommonHeader/CommonHeader.jsx";
 import { withRouter } from "react-router-dom";
 import request from "../../utils/request.js";
 
-const { CheckableTag } = Tag;
 const { confirm } = Modal;
 const { Content } = Layout;
-const editPath = "edit";
-const headerTitleConfig = {
-  edit: "编辑话题",
-  post: "发布话题",
-};
 
 Quill.register("modules/imageResize", ImageResize);
 
@@ -82,7 +74,10 @@ class TopicPost extends React.Component {
           "https://api-usv2.ncuos.com/api/topic",
           { content, label_id: checkedLabels, title },
           "POST"
-        ).then((res) => push(`/community/topic?topic_id=${res.data.topic_id}`));
+        ).then((res) => {
+          push(`/community/topic?topic_id=${res.data.topic_id}`);
+          message.success("发布成功");
+        });
       }
     );
   };

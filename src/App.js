@@ -27,7 +27,7 @@ class App extends Component {
             <Route path="/community/index" component={Community}></Route>
             <Route path="/community/topic" component={Topic}></Route>
             <Route path="/community/post" component={Post}></Route>
-            <Redirect to="/community/index/0"></Redirect>
+            <Redirect to="/community/index"></Redirect>
           </Switch>
         </Layout>
       </Layout>
