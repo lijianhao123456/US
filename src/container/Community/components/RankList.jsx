@@ -63,6 +63,7 @@ function RankListItem(props) {
         <UserInfo
           user={user}
           showDivider={false}
+          hasTooltip = {false}
           textStyle={{
             marginLeft: "10px",
             fontSize: "14px",

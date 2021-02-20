@@ -4,7 +4,6 @@ import { Divider, Tooltip, Avatar } from "antd";
 export default ({
   user = {},
   hasTooltip = true,
-  showDesc = true,
   avatarSize = "default",
   textStyle,
   dateStyle,
