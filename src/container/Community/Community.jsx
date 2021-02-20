@@ -63,6 +63,7 @@ class Community extends PureComponent {
     request(
       `api/topic/list?page_num=${pageNumber}&page_size=${page_size}&label_id=${currentLabel}&sortord=0`
     ).then((result) => this.props.getTopicList(result.data));
+    window.scrollTo(0, 0);
   }
   handleMenuClick({ key }) {
     const { currentLabel } = this.props.topicListInfo;

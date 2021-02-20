@@ -35,6 +35,7 @@ const ListItemBottom = ({
                 request(
                   `api/topic/list?page_num=1&page_size=10&label_id=${label_id}&sortord=0`
                 ).then((result) => changeLabel(result.data));
+                window.scrollTo(0, 0);
               } else {
                 message.error("未分类(US怎么未分类也请求全部第一页数据)");
               }

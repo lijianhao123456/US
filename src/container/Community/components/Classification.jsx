@@ -18,6 +18,7 @@ class Classification extends React.Component {
       request(`api/topic/list?page_num=1&page_size=10&label_id=${id}&sortord=0`).then((result) =>
         this.props.changeLabel(result.data)
       );
+      window.scrollTo(0, 0);
     };
   }
   render() {
