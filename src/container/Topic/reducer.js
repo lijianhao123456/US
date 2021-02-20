@@ -1,4 +1,4 @@
-import { GET_TOPIC_DETAIL, TOGGLE_LOVE, REPLY, CLEAR_REPLY } from "./action"
+import { GET_TOPIC_DETAIL, TOGGLE_LOVE, REPLY, CLEAR_REPLY, CLEAR_TOPIC } from "./action"
 
 const initState = {
     topicDetail: {},
@@ -21,6 +21,9 @@ export default function reducer(preState = initState, action) {
             return newState
         case CLEAR_REPLY:
             newState.replyInfo = {}
+            return newState
+        case CLEAR_TOPIC:
+            newState = initState
             return newState
         default:
             return preState

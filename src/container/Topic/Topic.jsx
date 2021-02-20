@@ -13,7 +13,7 @@ import CommentListItem from "./components/Comment/CommentListItem.jsx";
 import Comment from "./components/Comment/Comment.jsx";
 import MyHeader from "../../components/MyHeader/MyHeader.jsx";
 
-import { getTopicDetail, toggleLove, reply, clearReply } from "./action";
+import { getTopicDetail, toggleLove, reply, clearReply, clearTopic } from "./action";
 import "./Topic.less";
 const { Content } = Layout;
 class Topic extends Component {
@@ -25,6 +25,9 @@ class Topic extends Component {
         this.props.getTopicDetail(result.data);
       })
       .catch(() => this.props.history.push("/community/index"));
+  }
+  componentWillUnmount() {
+    this.props.clearTopic();
   }
   render() {
     const { topic, love, love_count, comments } = this.props.topicInfo.topicDetail;
@@ -81,5 +84,5 @@ export default connect(
     topicInfo: state.Topic,
     myInfo: state.Global,
   }),
-  { getTopicDetail, toggleLove, reply, clearReply }
+  { getTopicDetail, toggleLove, reply, clearReply, clearTopic }
 )(Topic);
