@@ -13,7 +13,6 @@ import request from "../../../utils/request";
 class Classification extends React.Component {
   changeLabel(id) {
     return () => {
-      console.log(this.props);
       this.props.history.push(`/community/index/${id}`);
       request(`api/topic/list?page_num=1&page_size=10&label_id=${id}&sortord=0`).then((result) =>
         this.props.changeLabel(result.data)

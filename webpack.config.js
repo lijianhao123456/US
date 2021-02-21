@@ -6,7 +6,7 @@ const webpack = require('webpack');
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, '../dist'),
+        path: path.resolve(__dirname, './dist'),
         filename: 'index_bundle.js',
         publicPath: '/'//解决刷新404问题
     },
@@ -58,6 +58,7 @@ module.exports = {
         quiet: true,
         open: true,
         contentBase: './dist',
+        progress: true,
         historyApiFallback: {
             index: '/' //解决刷新404问题
         },
@@ -66,7 +67,8 @@ module.exports = {
     mode: 'development',
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            template: 'src/index.html',
+            favicon: 'public/favicon.png'
         }),
         new webpack.ProvidePlugin({
             'window.Quill': 'quill',

@@ -21,7 +21,6 @@ class MyHeader extends Component {
   componentDidMount() {
     const { getMyInfo } = this.props;
     request("https://api-usv2.ncuos.com/api/user/me").then((result) => getMyInfo(result.data));
-    console.log(this.props);
   }
   logout() {
     localStorage.removeItem("token");

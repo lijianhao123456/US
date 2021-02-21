@@ -1,9 +1,7 @@
 import { Alert, Checkbox, Form, Input, Button, Layout } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-// import Login from "components/Login";
 import { connect } from "react-redux";
 import React, { Component } from "react";
-// import { getUsername, postForgotPassword } from "src/services/user";
 import { login } from "../../redux/action";
 import LoginModal from "./components/LoginModal.jsx";
 import "./Login.less";
@@ -113,7 +111,7 @@ class Login extends Component {
     //   });
     // }
   };
-
+  test = () => {console.log(localStorage.getItem("token"))};
   render() {
     const {
       type,
@@ -131,7 +129,7 @@ class Login extends Component {
       <div className="login-container">
         <div className="login-content">
           <div className="login-main">
-            <header>
+            <header onClick={this.test.bind(this)}>
               <h1>US FOR NCUHOMERS</h1>
             </header>
             <div className="login">

@@ -21,11 +21,9 @@ export default function reducer(preState = initState, action) {
             return newState
         case LOGIN:
             newState.token = data
-            console.log(newState);
             return newState
         case LOGOUT:
             newState.token = initState.token
-            console.log(newState);
             return newState
         default:
             return preState
