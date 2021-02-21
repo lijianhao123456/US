@@ -23,6 +23,10 @@ class Login extends Component {
     modalTiptext: "",
   };
 
+  componentDidMount() {
+    localStorage.getItem("token") && this.props.history.push("/community/index");
+  }
+
   changeAutoLogin = (e) => {
     this.setState({
       autoLogin: e.target.checked,

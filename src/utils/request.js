@@ -41,6 +41,9 @@ axios.interceptors.response.use(
         return response;
     },
     error => {
+        if (error.response.data.status === 401) {
+            localStorage.removeItem("token")
+        };
         message.error(error.response.data.message)
         return Promise.reject(error.response);
     }
