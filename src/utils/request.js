@@ -43,6 +43,7 @@ axios.interceptors.response.use(
     error => {
         if (error.response.data.status === 401) {
             localStorage.removeItem("token")
+            window.location.pathname = "/user/login"
         };
         message.error(error.response.data.message)
         return Promise.reject(error.response);
