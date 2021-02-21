@@ -11,7 +11,7 @@ import { Layout, Menu, Dropdown, message, Avatar } from "antd";
 import request from "../../utils/request";
 import { connect } from "react-redux";
 
-import { toggleCollapse, getMyInfo, initCollapse } from "../../redux/action";
+import { toggleCollapse, getMyInfo, initCollapse, logout } from "../../redux/action";
 import "./MyHeader.less";
 import { withRouter } from "react-router-dom";
 
@@ -25,6 +25,7 @@ class MyHeader extends Component {
   }
   logout() {
     localStorage.removeItem("token");
+    this.props.logout();
     this.props.history.push("/user/login");
   }
   render() {
@@ -85,5 +86,5 @@ export default connect(
   (state) => ({
     info: state.Global,
   }),
-  { toggleCollapse, getMyInfo, initCollapse }
+  { toggleCollapse, getMyInfo, initCollapse, logout }
 )(withRouter(MyHeader));

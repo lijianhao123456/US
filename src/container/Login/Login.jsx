@@ -4,13 +4,14 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import React, { Component } from "react";
 // import { getUsername, postForgotPassword } from "src/services/user";
+import { login } from "../../redux/action";
 import LoginModal from "./components/LoginModal.jsx";
 import "./Login.less";
 import request from "../../utils/request.js";
 
 const { Footer } = Layout;
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     type: "username",
     autoLogin: true,
@@ -36,20 +37,12 @@ export default class Login extends Component {
       "https://api-usv2.ncuos.com/api/user/login",
       { ...values, remember_me: autoLogin },
       "POST"
-    ).then((res) => localStorage.setItem("token", res.data.token));
-    this.props.history.push("/community/index");
-    // dispatch({
-    //   type: "login/login",
-    //   payload: {
-    //     remember_me: autoLogin,
-    //     ...values,
-    //   },
-    // });
+    ).then((res) => {
+      localStorage.setItem("token", res.data.token);
+      this.props.login(res.data.token);
+      this.props.history.push("/community/index");
+    });
   };
-
-  // renderMessage = (content) => {
-  //   return <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />;
-  // };
 
   onModalCancel = () => {
     this.setState({
@@ -122,10 +115,6 @@ export default class Login extends Component {
   };
 
   render() {
-    const onFinish = (values) => {
-      console.log("Received values of form: ", values);
-    };
-    const { login, submitting } = this.props;
     const {
       type,
       autoLogin,
@@ -219,7 +208,9 @@ export default class Login extends Component {
   }
 }
 
-// export default connect(({ login, loading }) => ({
-//   login,
-//   submitting: loading.effects["login/login"],
-// }))(LoginPage);
+export default connect(
+  (state) => ({
+    info: state.Global,
+  }),
+  { login }
+)(Login);

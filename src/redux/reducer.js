@@ -1,8 +1,9 @@
-import { TOGGLE_COLLAPSE, GET_MY_INFO, INIT_COLLAPSE } from "./action"
+import { TOGGLE_COLLAPSE, GET_MY_INFO, INIT_COLLAPSE, LOGIN, LOGOUT } from "./action"
 
 const initState = {
     collapsed: false,
-    myInfo: {}
+    myInfo: {},
+    token: ""
 }
 
 export default function reducer(preState = initState, action) {
@@ -17,6 +18,14 @@ export default function reducer(preState = initState, action) {
             return newState
         case GET_MY_INFO:
             newState.myInfo = data
+            return newState
+        case LOGIN:
+            newState.token = data
+            console.log(newState);
+            return newState
+        case LOGOUT:
+            newState.token = initState.token
+            console.log(newState);
             return newState
         default:
             return preState
