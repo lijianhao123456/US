@@ -24,10 +24,13 @@ export default class LoginModal extends React.Component {
       buttonClickHandler,
       placeholder = "输入姓名",
       tipText = "找到用户名？直接登陆",
+      extra,
+      isInput = true,
     } = this.props;
 
     return (
       <Modal
+        bodyStyle={{ color: " rgba(0, 0, 0, 0.65)" }}
         visible={visible}
         destroyOnClose
         onCancel={onCancel}
@@ -36,20 +39,35 @@ export default class LoginModal extends React.Component {
         centered
         className="login-modal"
       >
-        <div>
+        <div className="login-modal-wrapper">
           <h2>US FOR NCUHOMERS</h2>{" "}
-          <div className="form-wrapper">
-            <Input
-              type="text"
-              value={inputValue}
-              onChange={inputChangeHandler}
-              placeholder={placeholder}
-            />
-            <Button type="primary" size="large" onClick={buttonClickHandler}>
-              {buttonText}
-            </Button>
+          {isInput ? (
+            <div className="login-modal-form">
+              <Input
+                type="text"
+                value={inputValue}
+                onChange={inputChangeHandler}
+                placeholder={placeholder}
+                className="login-modal-input"
+              />
+              <Button
+                type="primary"
+                size="large"
+                onClick={buttonClickHandler}
+                className="login-modal-button"
+              >
+                {buttonText}
+              </Button>
+            </div>
+          ) : (
+            <div className="login-modal-result">
+              <div className="login-modal-result-title">{title}</div>
+              {extra}
+            </div>
+          )}
+          <div className="login-modal-tip" onClick={onCancel}>
+            {tipText}
           </div>
-          <div onClick={onCancel}>{tipText}</div>
         </div>
       </Modal>
     );

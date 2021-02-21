@@ -87,31 +87,36 @@ class Login extends Component {
 
   handleUsernameQuery = async () => {
     console.log(1);
-    // const { modalInputValue: truename } = this.state;
-    // const res = await getUsername(truename);
-    // const { status } = res;
-    // if (status === successStatus) {
-    //   this.setState({
-    //     modalTitle: `找到 ${truename} 存在如下用户名：`,
-    //     modalIsInput: false,
-    //     modalExtra: res.data.map(({ username }) => <span key={username}>{username}</span>),
-    //   });
-    // }
+    const { modalInputValue: truename } = this.state;
+    const res = await request(`https://api-usv2.ncuos.com/api/user/username`, { truename });
+    const { status } = res;
+    if (status === 200) {
+      this.setState({
+        modalTitle: `找到 ${truename} 存在如下用户名：`,
+        modalIsInput: false,
+        modalExtra: res.data.map(({ username }) => <span key={username}>{username}</span>),
+      });
+    }
   };
 
   handlePasswordQuery = async () => {
-    console.log(1);
-    // const { modalInputValue: username } = this.state;
-    // const res = await postForgotPassword(username);
-    // const { status } = res;
-    // if (status === successStatus) {
-    //   this.setState({
-    //     modalTitle: `重置密码链接已发送到您的邮箱，请查看邮件`,
-    //     modalIsInput: false,
-    //   });
-    // }
+    const { modalInputValue: username } = this.state;
+    const res = await request(
+      `https://api-usv2.ncuos.com/api/user/forgot_password`,
+      { username },
+      "POST"
+    );
+    const { status } = res;
+    if (status === 200) {
+      this.setState({
+        modalTitle: `重置密码链接已发送到您的邮箱，请查看邮件`,
+        modalIsInput: false,
+      });
+    }
   };
-  test = () => {console.log(localStorage.getItem("token"))};
+  test = () => {
+    console.log(localStorage.getItem("token"));
+  };
   render() {
     const {
       type,
@@ -175,7 +180,7 @@ class Login extends Component {
                   </Button>
                 </Form.Item>
                 <div className="login-forgotton">
-                  <p onClick={this.handlePasswordForggoten}>老家园忘记用户名?</p>
+                  <p onClick={this.handleUsernameForggoten}>老家园忘记用户名?</p>
                 </div>
               </Form>
               <LoginModal
